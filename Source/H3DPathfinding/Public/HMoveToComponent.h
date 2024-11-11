@@ -17,6 +17,10 @@ class H3DPATHFINDING_API UHMoveToComponent : public UActorComponent
 
 	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
 	FVector TargetLocation;//Target location of the actor.
+	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
+	bool bDrawDebugLine = true;//If the debug line should be drawn or not.
+	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
+	float DebugLineDuration = -1.0f;//Duration of the debug line. -1 means infinite duration.
 	
 	TArray<FVector> PathPoints;//Array of the points in the path.
 	
@@ -33,11 +37,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "MoveToComponent")
 	void HMoveTo(AActor* ActorRef, AHVolume3D* VolumeRef, float ToleranceRef);//Starts the pathfinding process.
-
-	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
-	bool bDrawDebugLine = false;//If the debug line should be drawn or not.
-	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
-	float DebugLineDuration = -1.0f;//Duration of the debug line. -1 means infinite duration.
+	
 
 private:
 	bool bCanFindPath = true;//If the path can be found or not.

@@ -1,19 +1,14 @@
 //HVolume3D.cpp
 
 #include "HVolume3D.h"
-#include "HPathCore.h"
-#include "HDinamicObjects.h"
-#include "StructuresEnums_H3DPathFinding.h"
-#include "Async/Async.h"
-#include "TimerManager.h"
-#include "Engine/Engine.h"
-#include "GameFramework/PlayerController.h"
-#include "GameFramework/Pawn.h"
-#include "Kismet/GameplayStatics.h"
+#include <Kismet/GameplayStatics.h>
 #include "Components/BoxComponent.h"
 #include "DrawDebugHelpers.h"
+#include "HPathCore.h"
 #include "Engine/World.h"
-
+#include "HDinamicObjects.h"
+#include "TimerManager.h"
+#include "StructuresEnums_H3DPathFinding.h"
 
 AHVolume3D::AHVolume3D()
 {
@@ -257,7 +252,7 @@ void AHVolume3D::DivideGridsIntoSmallerGrids(const TArray<FVector>& CellPosition
 
     if (HitGridPositions.Num() > 0)//If there are hit grid positions.
     {
-        DivideGridsIntoSmallerGrids(HitGridPositions, SmallerCellSize / 2.0f,ChildGridsMap);//Divide the grids into smaller grids again.
+        DivideGridsIntoSmallerGrids(HitGridPositions, SmallerCellSize / 2.0f, ChildGridsMap);//Divide the grids into smaller grids again.
     }
 }
 

@@ -4,9 +4,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HPathCore.h"
 #include "StructuresEnums_H3DPathFinding.h"
 #include "GameFramework/Actor.h"
+#include "TimerManager.h"
+#include "HPathCore.h"
 #include "HVolume3D.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGridsUpdated);//Delegate for when the grids are updated by DinamicObjects.
@@ -15,7 +16,7 @@ UCLASS()
 class H3DPATHFINDING_API AHVolume3D : public AActor
 {
     GENERATED_BODY()
-    
+
     class UBoxComponent* VolumeBox;//Box component for the volume.
 
     FVector OriginOfVolume; //Origin of the volume.

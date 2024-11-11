@@ -1,11 +1,12 @@
-//HMoveToComponent.cpp
+//MoveToComponent.cpp
 
 #include "HMoveToComponent.h"
 #include "GameFramework/Character.h"
-#include "Async/Async.h"
+#include "TimerManager.h"
 #include "DrawDebugHelpers.h"
 #include "HVolume3D.h"
-#include "TimerManager.h"
+#include "HPathCore.h"
+#include "Async/Async.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values for this component's properties and starts the pathfinding process.
@@ -41,7 +42,7 @@ void UHMoveToComponent::OnPathFound(const FS_PathResult& Result)
 		Volume->OnGridsUpdated.AddDynamic(this, &UHMoveToComponent::CheckAvailability);//Bind the CheckAvailability function to OnGridsUpdated delegate.
 		
 		GetWorld()->GetTimerManager().SetTimer(MoveToTimerHandle, this, &UHMoveToComponent::MoveToTick, 0.001f, true);//Start the timer to move the actor to the target location.
-		GetWorld()->GetTimerManager().SetTimer(CooldownForFindPathTimerHandle, this, &UHMoveToComponent::CooldownForFindPath, 1.0f, false);//Start the cooldown for finding the path.
+		GetWorld()->GetTimerManager().SetTimer(CooldownForFindPathTimerHandle, this, &UHMoveToComponent::CooldownForFindPath, 0.5f, false);//Start the cooldown for finding the path.
 		
 		PathPoints = Result.PathPoints;//Set the path points.
 		CurrentPathIndex = 0;//Set the current path index to 0.
@@ -107,7 +108,7 @@ void UHMoveToComponent::CheckAvailability()
 				Volume->OnGridsUpdated.RemoveDynamic(this, &UHMoveToComponent::CheckAvailability);//Unbind the CheckAvailability function from OnGridsUpdated delegate.
 				bCanCheckAvailability = false;
 				HMoveTo(Actor,Volume, Tolerance);//Find the path again.
-				GetWorld()->GetTimerManager().SetTimer(CooldownForCheckAvailabilityTimerHandle, this, &UHMoveToComponent::CooldownForCheckAvailability, 0.25f, false);//Start the cooldown for checking the availability of the path.
+				GetWorld()->GetTimerManager().SetTimer(CooldownForCheckAvailabilityTimerHandle, this, &UHMoveToComponent::CooldownForCheckAvailability, 0.1f, false);//Start the cooldown for checking the availability of the path.
 			}
 		});
 	});

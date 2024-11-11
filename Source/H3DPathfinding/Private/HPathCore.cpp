@@ -2,8 +2,8 @@
 
 #include "HPathCore.h"
 #include "HVolume3D.h"
-#include "StructuresEnums_H3DPathFinding.h"
 #include <queue>
+#include "StructuresEnums_H3DPathFinding.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Async/Async.h"
 
@@ -82,7 +82,7 @@ void AHPathCore::AssignRequest(FS_PathRequest& Request)
     {
         FS_PathResult* Result = new FS_PathResult();//Create a new path result.
         
-        FindPath(WorldRef, VolumeRef, Result, Start, End, Delegate, bIsWalking, CharacterRadius, CharacterHalfHeight, OwnerRef,false);
+        FindPath(WorldRef, VolumeRef, Result, Start, End, Delegate, bIsWalking, CharacterRadius, CharacterHalfHeight, OwnerRef, false);
         
         AsyncTask(ENamedThreads::GameThread, [this, Result, Delegate]()
         {
@@ -157,7 +157,7 @@ void AHPathCore::FindPath(UWorld* WorldRef,AHVolume3D* VolumeRef,FS_PathResult* 
                 Path.Insert(Node->WorldLocation, 0);
             }
 
-            SmoothenPath(WorldRef, Path, bIsWalking, CharacterRadius, CharacterHalfHeight);//Smoothen the path
+            SmoothenPath(WorldRef, Path, VolumeRef, bIsWalking, CharacterRadius, CharacterHalfHeight);//Smoothen the path
 
             Result->PathPoints = Path;
             Result->bSuccess = true;
@@ -219,7 +219,7 @@ void AHPathCore::FindPath(UWorld* WorldRef,AHVolume3D* VolumeRef,FS_PathResult* 
             delete NodeToDelete;
         }
         // Find the path again with the adjusted end location
-        FindPath(WorldRef, VolumeRef, Result, Start, End, Delegate, bIsWalking, CharacterRadius, CharacterHalfHeight, OwnerRef,true);
+        FindPath(WorldRef, VolumeRef, Result, Start, End, Delegate, bIsWalking, CharacterRadius, CharacterHalfHeight, OwnerRef, true);
         return;
     }
 
@@ -454,7 +454,7 @@ bool AHPathCore::CanSkip(UWorld* WorldRef,FVector Start,FVector End,float Charac
 }
 
 // Smoothen the path by removing unnecessary points
-void AHPathCore::SmoothenPath(UWorld* WorldRef,TArray<FVector>& PathPoints,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight)
+void AHPathCore::SmoothenPath(UWorld* WorldRef,TArray<FVector>& PathPoints,AHVolume3D* VolumeRef,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight)
 {
     int32 PathSize = PathPoints.Num();
     if (PathSize < 3)//If the path size is less than 3, return.
@@ -468,7 +468,7 @@ void AHPathCore::SmoothenPath(UWorld* WorldRef,TArray<FVector>& PathPoints,bool 
         FVector& NextNextNode = PathPoints[CurrentIndex + 2];//Get the next next node.
         
         float heightDistance = FMath::Abs(StartNode.Z - NextNextNode.Z);//Calculate the height distance between the start node and the next next node.
-        if(bIsWalking && heightDistance > 60)//If the height distance is greater than the cell size, increase the current index and continue.
+        if(bIsWalking && heightDistance > VolumeRef->CellSize)//If the height distance is greater than the cell size, increase the current index and continue.
         {
             CurrentIndex++;
             continue;

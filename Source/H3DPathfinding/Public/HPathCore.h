@@ -30,7 +30,7 @@ public:
 
     void AssignRequest(FS_PathRequest& Request); // Assign the pathfinding request.
     void SubmitResult(FS_PathResult* Result, PathResultDelegate Delegate); // Submit the pathfinding result.
-    void FindPath(UWorld* WorldRef,AHVolume3D* VolumeRef,FS_PathResult* Result,FVector Start,FVector End,PathResultDelegate Delegate,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight,AActor* OwnerRef,bool bPathAdjusted); // Find the path between two points.
+    void FindPath(UWorld* WorldRef,AHVolume3D* VolumeRef,FS_PathResult* Result,FVector Start,FVector End,PathResultDelegate Delegate,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight,AActor* OwnerRef, bool bPathAdjusted); // Find the path between two points.
 
 private:
     
@@ -39,7 +39,7 @@ private:
     void GetUpSideNeighbor(UWorld* WorldRef,AHVolume3D* VolumeRef,FVector neighborPosition, const FAStarNode& CurrentNode,TArray<FAStarNode>& OutNeighbors,TMap<int32, FAStarNode*>& OpenMap,TSet<int32>& ClosedSet,float CharacterRadius,float CharacterHalfHeight,AActor* OwnerRef); // Get the upside neighbor of the current node for the walking characters.
     bool IsLocationFree(UWorld* WorldRef,const FVector& Location,float CharacterRadius,float CharacterHalfHeight,AActor* OwnerRef); // Check if the location is free or not.
     bool CanSkip(UWorld* WorldRef,FVector Start,FVector End,float CharacterRadius,float CharacterHalfHeight); // Check if the path can be skipped or not.
-    void SmoothenPath(UWorld* WorldRef,TArray<FVector>& PathPoints,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight); // Smoothen the path.
+    void SmoothenPath(UWorld* WorldRef,TArray<FVector>& PathPoints,AHVolume3D* VolumeRef,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight); // Smoothen the path.
     FVector AdjustEnd(UWorld* WorldRef,const FVector& EndPosition,AHVolume3D* VolumeRef,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight,AActor* OwnerRef); // Adjust the end position of the path.
     FVector AdjustPath(UWorld* WorldRef,const FVector& EndPosition,AHVolume3D* VolumeRef,bool bIsWalking,float CharacterRadius,float CharacterHalfHeight,AActor* OwnerRef); // Adjust the end position of the path.
 };
