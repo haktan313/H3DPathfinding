@@ -1,5 +1,5 @@
 # H3DPathfinding
-# 3D Pathfinding Plugin Documentation
+# H3DPathfinding Plugin Documentation
 
 ## Introduction
 This plugin enables characters in Unreal Engine to navigate 3D environments, reaching targets along the shortest path while dynamically detecting and updating for both static and moving obstacles in walk and fly modes.
@@ -18,6 +18,28 @@ This plugin is compatible with Unreal Engine 5.2 and above, and is designed to w
 
 3. **Activate the Plugin**  
    Open Unreal Engine, go to `Edit > Plugins`, and enable the plugin.
+
+## Workflow
+
+### 1. Volume and Grid Division
+**AHVolume3D** divides the volume into grids, marking each as full or empty for efficient pathfinding calculations.
+
+### 2. Pathfinding and Obstacle Detection
+**AHPathCore** uses A* to find the shortest path, recalculating in real-time when obstacles appear.
+
+### 3. Movement Modes
+This plugin allows both walking and flying modes, customized through Character Movement Component.
+
+- **Walking Mode**: Moves character along same-level grids, navigating small obstacles and sloped surfaces.
+- **Flying Mode**: Enables unrestricted movement in 3D space, without vertical limitations.
+
+## Features
+
+- **Dynamic Obstacle Detection**: Detects nearby obstacles and recalculates paths as needed.
+- **Real-time Path Updates**: Updates routes in real-time when obstacles appear.
+- **Flexible Movement Modes**: Supports both walking and flying modes.
+- **Grid-based Volume Management**: Efficiently manages grid-based paths.
+- **Smooth Path Optimization**: Reduces unnecessary nodes for smoother paths.
 
 ## Architecture and Structure
 
@@ -77,35 +99,4 @@ In C++, follow these steps:
     PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput", "H3DPathfinding" });
     ```
 
-## Workflow
 
-### 1. Volume and Grid Division
-**AHaktan3DVolume** divides the volume into grids, marking each as full or empty for efficient pathfinding calculations.
-
-### 2. Pathfinding and Obstacle Detection
-**AHaktanPathCore** uses A* to find the shortest path, recalculating in real-time when obstacles appear.
-
-### 3. Movement Modes
-This plugin allows both walking and flying modes, customized through Character Movement Component.
-
-- **Walking Mode**: Moves character along same-level grids, navigating small obstacles and sloped surfaces.
-- **Flying Mode**: Enables unrestricted movement in 3D space, without vertical limitations.
-
-## Features
-
-- **Dynamic Obstacle Detection**: Detects nearby obstacles and recalculates paths as needed.
-- **Real-time Path Updates**: Updates routes in real-time when obstacles appear.
-- **Flexible Movement Modes**: Supports both walking and flying modes.
-- **Grid-based Volume Management**: Efficiently manages grid-based paths.
-- **Smooth Path Optimization**: Reduces unnecessary nodes for smoother paths.
-
----
-
-Bu temel dökümantasyon formatını Markdown ile **README.md** dosyasına ekleyebilirsiniz.
-
-### Adım 3: Görselleri Ekleme
-Markdown'da görselleri göstermek için GitHub deposuna bir **images** klasörü oluşturun ve tüm görselleri bu klasöre yükleyin. Ardından, görselleri Markdown içinde bu klasör yolunu kullanarak çağırın.
-
-Örneğin:
-```markdown
-![Blueprint Example](images/BlueprintExample.png)
