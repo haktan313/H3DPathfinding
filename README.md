@@ -151,6 +151,7 @@ In C++, follow these steps:
     ```
 
 ## Tutorial Video
-Watch the tutorial on YouTube: [H3DPathfinding Plugin Tutorial](https://youtu.be/czdlgMWkZE0)
+[![H3DPathfinding Plugin Tutorial](images/youtube-thumbnail.png)](https://youtu.be/czdlgMWkZE0)
+
 
 
