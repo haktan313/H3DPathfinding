@@ -29,16 +29,19 @@ This plugin is compatible with Unreal Engine 5.2 and later and is designed to wo
 **AHPathCore** uses A* to find the shortest path, recalculating in real-time when obstacles appear.
 
 ### 3. Movement Modes
-This plugin allows both walking and flying modes, customized through Character Movement Component.
+This plugin allows both walking and flying modes, customized through Character Movement Component.This makes it easy to adjust parameters such as speed, acceleration, and movement style.
 
 - **Walking Mode**: Moves character along same-level grids, navigating small obstacles and sloped surfaces.
-- **Flying Mode**: Enables unrestricted movement in 3D space, without vertical limitations.
+- **Flying Mode**: The character can freely move in all directions within the 3D space, with no vertical limitations.
 
 ## Features
 
-- **Dynamic Obstacle Detection**: Detects nearby obstacles and recalculates paths as needed.
-- **Real-time Path Updates**: Updates routes in real-time when obstacles appear.
+- **Dynamic Obstacle Detection**: The character detects nearby objects with DinamicObjectComponent and dynamically adjusts its route to avoid obstacles.
+  This feature ensures smooth navigation, even in environments with moving obstacles.
+- **Real-time Path Updates**: The A algorithm* recalculates the route in real-time if new obstacles appear in the path.
+   Triggered by CheckAvailability from the DinamicObjectComponent, the character quickly adapts to environmental changes, maintaining the optimal route to the target.
 - **Flexible Movement Modes**: Supports both walking and flying modes.
+- Character Movement Component Integration: Parameters like speed, acceleration, and movement style are easily adjustable through Character Movement Component, allowing for custom movement settings for each mode.
 - **Grid-based Volume Management**: Efficiently manages grid-based paths.
 - **Smooth Path Optimization**: Reduces unnecessary nodes for smoother paths.
 
