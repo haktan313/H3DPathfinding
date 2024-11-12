@@ -21,13 +21,13 @@ void EmptyLinkFunctionForGeneratedCodeH3DPathfinding_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x3AAC0A6B,
-				0x48B233AB,
+				0xA27CA2F5,
+				0xAC20FF21,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_H3DPathfinding.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_H3DPathfinding.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_H3DPathfinding(Z_Construct_UPackage__Script_H3DPathfinding, TEXT("/Script/H3DPathfinding"), Z_Registration_Info_UPackage__Script_H3DPathfinding, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x3AAC0A6B, 0x48B233AB));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_H3DPathfinding(Z_Construct_UPackage__Script_H3DPathfinding, TEXT("/Script/H3DPathfinding"), Z_Registration_Info_UPackage__Script_H3DPathfinding, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xA27CA2F5, 0xAC20FF21));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

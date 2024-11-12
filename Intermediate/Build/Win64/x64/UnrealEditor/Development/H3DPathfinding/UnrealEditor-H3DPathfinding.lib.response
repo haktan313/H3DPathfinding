@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-H3DPathfinding.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Haktan\Documents\Unreal Projects\IHateYou\Intermediate\Build\Win64\x64\IHateYouEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_1.h.obj"
+"C:\Users\Haktan\Documents\Unreal Projects\IHateYou\Plugins\H3DPathfinding_5.2\Intermediate\Build\Win64\x64\UnrealEditor\Development\H3DPathfinding\Module.H3DPathfinding.cpp.obj"
+"C:\Users\Haktan\Documents\Unreal Projects\IHateYou\Plugins\H3DPathfinding_5.2\Intermediate\Build\Win64\x64\UnrealEditor\Development\H3DPathfinding\Default.rc2.res"
+/OUT:"C:\Users\Haktan\Documents\Unreal Projects\IHateYou\Plugins\H3DPathfinding_5.2\Intermediate\Build\Win64\x64\UnrealEditor\Development\H3DPathfinding\UnrealEditor-H3DPathfinding.lib"

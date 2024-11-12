@@ -6,7 +6,7 @@
 #include "DrawDebugHelpers.h"
 #include "HPathCore.h"
 #include "Engine/World.h"
-#include "HDinamicObjects.h"
+#include "HDynamicObjects.h"
 #include "TimerManager.h"
 #include "StructuresEnums_H3DPathFinding.h"
 
@@ -144,15 +144,15 @@ void AHVolume3D::DivideVolumeIntoGrids()
                 if (bHit)
                 {
                     bool bDynamicObject = false;
-                    for(FHitResult HitResult : HitResults)//Check if the hit actor has DinamicObjects component.
+                    for(FHitResult HitResult : HitResults)//Check if the hit actor has DynamicObjects component.
                     {
-                        if(HitResult.GetActor()->FindComponentByClass<UHDinamicObjects>())//If the hit actor has DinamicObjects component.
+                        if(HitResult.GetActor()->FindComponentByClass<UHDynamicObjects>())//If the hit actor has HDynamicObjects component.
                         {
                             bDynamicObject = true;
                             
                             AllGridsMap.Add(CellPosition, NewGrid);//Add the grid to the map.
-                            DinamicObjects.Add(HitResult.GetActor());//Add the hit actor to the dinamic objects.
-                            DinamicObjectsLastPosition.Add(HitResult.GetActor(), HitResult.GetActor()->GetActorLocation());//Add the last position of the hit actor to the dinamic objects last position.
+                            DynamicObjects.Add(HitResult.GetActor());//Add the hit actor to the dynamic objects.
+                            DynamicObjectsLastPosition.Add(HitResult.GetActor(), HitResult.GetActor()->GetActorLocation());//Add the last position of the hit actor to the dynamic objects last position.
                             CellsPosition.Add(CellPosition);//Add the cell position to the cells position for updating the grids.
                             
                             if(!GetWorld()->GetTimerManager().IsTimerActive(UpdateGridTimerHandle))//If the timer is not active.
@@ -269,7 +269,7 @@ void AHVolume3D::StartUpdateGrids()
 
 void AHVolume3D::UpdateGrids()
 {
-    if (DinamicObjects.Num() == 0)//If there are no dinamic objects.
+    if (DynamicObjects.Num() == 0)//If there are no dynamic objects.
     {
         CellsPosition.Empty();//Empty the cells position.
         UpdateCellsPosition.Empty();//Empty the update cells position.
@@ -285,15 +285,15 @@ void AHVolume3D::UpdateGrids()
     {
         bCanUpdateGrids = false;//Set the grids can be updated to false.
         TArray<FVector> CellPositionsRef;//Array of the cell positions reference.
-        for (AActor* DinamicObject : DinamicObjects)//For each dinamic object.
+        for (AActor* DynamicObject : DynamicObjects)//For each dynamic object.
         {
-            FVector ObjectLocation = DinamicObject->GetActorLocation();//Get the location of the dinamic object.
-            FVector* LastPosition = DinamicObjectsLastPosition.Find(DinamicObject);//Get the last position of the dinamic object.
+            FVector ObjectLocation = DynamicObject->GetActorLocation();//Get the location of the dynamic object.
+            FVector* LastPosition = DynamicObjectsLastPosition.Find(DynamicObject);//Get the last position of the dynamic object.
         
             if (LastPosition && *LastPosition != ObjectLocation)//If the last position is valid and the last position is not equal to the object location.
             {
                 FVector ObjectExtent;
-                DinamicObject->GetActorBounds(true, ObjectLocation, ObjectExtent);//Get the extent of the dinamic object.
+                DynamicObject->GetActorBounds(true, ObjectLocation, ObjectExtent);//Get the extent of the dynamic object.
 
                 int32 ObjectGridLeftX = FMath::FloorToInt((ObjectLocation.X - ObjectExtent.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//Calculate the left X.
                 int32 ObjectGridRightX = FMath::FloorToInt((ObjectLocation.X + ObjectExtent.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//Calculate the right X.
@@ -318,7 +318,7 @@ void AHVolume3D::UpdateGrids()
                         }
                     }
                 }
-                *LastPosition = ObjectLocation; // Update the last position of the dinamic object.
+                *LastPosition = ObjectLocation; // Update the last position of the dynamic object.
             }
         }
         AsyncTask(ENamedThreads::GameThread, [this,CellPositionsRef]()

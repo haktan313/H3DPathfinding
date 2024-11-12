@@ -42,8 +42,8 @@ public:
     float MinCellSize = 30.f;//Minimum size of the cell.
     float MaxDebugDrawDistance = 500.0f;//Maximum distance for drawing debug grid.
     
-    TArray<AActor*> DinamicObjects;//Array of the dinamic objects.
-    TMap<AActor*, FVector> DinamicObjectsLastPosition;//Map of the last positions of the dinamic objects.
+    TArray<AActor*> DynamicObjects;//Array of the dinamic objects.
+    TMap<AActor*, FVector> DynamicObjectsLastPosition;//Map of the last positions of the dinamic objects.
 
     FOnGridsUpdated OnGridsUpdated;//Delegate for when the grids are updated by DinamicObjects.
 
