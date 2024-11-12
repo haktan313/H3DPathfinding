@@ -38,11 +38,16 @@ This plugin allows both walking and flying modes, customized through Character M
 
 - **Dynamic Obstacle Detection**: The character detects nearby objects with DinamicObjectComponent and dynamically adjusts its route to avoid obstacles.
   This feature ensures smooth navigation, even in environments with moving obstacles.
+
 - **Real-time Path Updates**: The A algorithm* recalculates the route in real-time if new obstacles appear in the path.
    Triggered by CheckAvailability from the DinamicObjectComponent, the character quickly adapts to environmental changes, maintaining the optimal route to the target.
+  
 - **Flexible Movement Modes**: Supports both walking and flying modes.
-- Character Movement Component Integration: Parameters like speed, acceleration, and movement style are easily adjustable through Character Movement Component, allowing for custom movement settings for each mode.
+  
+- **Character Movement Component** Integration: Parameters like speed, acceleration, and movement style are easily adjustable through Character Movement Component, allowing for custom movement settings for each mode.
+  
 - **Grid-based Volume Management**: Efficiently manages grid-based paths.
+  
 - **Smooth Path Optimization**: Reduces unnecessary nodes for smoother paths.
 
 ## Architecture and Structure
