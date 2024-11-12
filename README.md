@@ -151,7 +151,7 @@ In C++, follow these steps:
     ```
 
 ## Tutorial Video
-[![H3DPathfinding Plugin Tutorial](images/youtube-thumbnail.png)](https://youtu.be/czdlgMWkZE0)
+[![H3DPathfinding Plugin Tutorial](images/youtube-thumbnail.png)](https://youtu.be/51_4N3GaQ9c)
 
 
 
