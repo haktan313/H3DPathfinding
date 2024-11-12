@@ -71,7 +71,7 @@ When configured, dynamic objects update grid status as they move. The pathfindin
 ### Blueprint Usage
 To move the character towards a target in Blueprint, call the `HMoveTo` function with the following parameters: `Target`, `Actor Ref`, `Volume Ref`, and `Tolerance Ref`.
 
-![Blueprint Example](images/BlueprintExample.png)
+![blueprint](https://github.com/user-attachments/assets/a16f0eab-6e16-426a-b5d2-c4278f6ba00a)
 
 ### C++ Usage
 In C++, follow these steps:
