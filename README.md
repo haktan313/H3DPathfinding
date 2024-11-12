@@ -5,6 +5,20 @@
 ## Introduction
 This plugin allows characters in Unreal Engine to navigate 3D environments, detecting and avoiding obstacles dynamically, and finding the shortest 3D path to their target, whether in flying or walking mode.
 
+## Contents
+
+- [Supported Versions](#supported-versions)
+- [Installation Instructions](#installation-instructions)
+- [Workflow](#workflow)
+  - [1. Volume and Grid Division](#1-volume-and-grid-division)
+  - [2. Pathfinding and Obstacle Detection](#2-pathfinding-and-obstacle-detection)
+  - [3. Movement Modes](#3-movement-modes)
+- [Features](#features)
+- [Architecture and Structure](#architecture-and-structure)
+  - [Core Components](#core-components)
+- [Dynamic Objects](#dynamic-objects)
+- [Blueprint and C++ Setup Examples](#blueprint-and-c-setup-examples)
+
 ## Supported Versions
 This plugin is compatible with Unreal Engine 5.2 and later and is designed to work in both Blueprint and C++ projects.
 
