@@ -80,6 +80,7 @@ This plugin uses a **grid-based volume** for pathfinding and employs an advanced
 
 ![volume](https://github.com/user-attachments/assets/b57a3671-9d01-4cd4-b261-46e5bbb11b5f)
 - **Volume**: RRepresents the grid-based volume where pathfinding operations are performed. The volume’s grids can be subdivided based on surrounding objects, marking each grid as not free or free.
+  
       -**Draw Debug Grids from Player**(varaible(bool)): When enabled, this variable visualizes grids around the player, showing nearby navigable areas for debugging purposes.
 
 ![core](https://github.com/user-attachments/assets/4c82a512-78ea-4f48-b69d-63c8cbec5e9d)
@@ -87,8 +88,11 @@ This plugin uses a **grid-based volume** for pathfinding and employs an advanced
 
 ![moveto](https://github.com/user-attachments/assets/62e16a9e-ddf8-4298-a4ee-d1ab36a36276)
 - **MoveToComponent**: Manages pathfinding requests and movement for the character. It uses Unreal Engine's Character Movement Component to ensure smooth navigation.
+  
       -**TargetLocation**(varaible(Vector)): Set the target location for the character to reach.
+  
       -**Draw Debug Line**(varaible(bool)): When enabled, this variable displays the path line from the character to the target, useful for visualizing the calculated path.
+  
       -**Debug Line Duration**(varaible(float)): Sets the duration (in seconds) for how long the debug line remains visible. A value of -1 makes the line persist indefinitely.
 
 ![component](https://github.com/user-attachments/assets/17d5948f-e075-4371-a704-0d91612a2f17)
