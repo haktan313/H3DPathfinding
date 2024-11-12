@@ -36,14 +36,14 @@ This plugin is compatible with Unreal Engine 5.2 and later and is designed to wo
 
 ## Workflow
 
-### 1. Volume and Grid Division
-**AHVolume3D** divides the volume into grids, marking each as full or empty for efficient pathfinding calculations.
+### 1. Volume and Grid Division !
+**AHVolume3D** divides the volume into grids, marking each as full or empty for efficient pathfinding calculations. [volume](https://github.com/user-attachments/assets/daa5fc5a-523b-48d2-ac0d-e8b1741929b5)
 
-### 2. Pathfinding and Obstacle Detection
-**AHPathCore** uses A* to find the shortest path, recalculating in real-time when obstacles appear.
+### 2. Pathfinding and Obstacle Detection 
+**AHPathCore** uses A* to find the shortest path, recalculating in real-time when obstacles appear. ![core](https://github.com/user-attachments/assets/3c68786d-9794-4b76-a9b3-e1baf16430d1)
 
 ### 3. Movement Modes
-This plugin allows both walking and flying modes, customized through Character Movement Component.This makes it easy to adjust parameters such as speed, acceleration, and movement style.
+This plugin allows both walking and flying modes, customized through Character Movement Component.This makes it easy to adjust parameters such as speed, acceleration, and movement style. ![moveto](https://github.com/user-attachments/assets/62e16a9e-ddf8-4298-a4ee-d1ab36a36276)
 
 - **Walking Mode**: Moves character along same-level grids, navigating small obstacles and sloped surfaces.
 - **Flying Mode**: The character can freely move in all directions within the 3D space, with no vertical limitations.
