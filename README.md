@@ -150,4 +150,7 @@ In C++, follow these steps:
     PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput", "H3DPathfinding" });
     ```
 
+## Tutorial Video
+Watch the tutorial on YouTube: [H3DPathfinding Plugin Tutorial]([https://www.youtube.com/watch?v=YourVideoID](https://youtu.be/51_4N3GaQ9c))
+
 
