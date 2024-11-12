@@ -21,6 +21,7 @@ This plugin allows characters in Unreal Engine to navigate 3D environments, dete
 - [Dynamic Objects](#dynamic-objects)
 - [Blueprint and C++ Setup Examples](#blueprint-and-c-setup-examples)
 - [Tutorial Video](#tutorial-video)
+- [Potential Issues](#potential-issues)
 
 ## Supported Versions
 This plugin is compatible with Unreal Engine 5.2 and later and is designed to work in both Blueprint and C++ projects.
@@ -121,7 +122,7 @@ When configured, dynamic objects update grid status as they move. The pathfindin
 ## Blueprint and C++ Setup Examples
 
 ### Blueprint Usage
-To move the character towards a target in Blueprint, call the `HMoveTo` function with the following parameters: `Target(HMoveToComponent)`, `Actor Ref`, `Volume Ref`, and `Tolerance Ref`.
+To move the character towards a target in Blueprint, call the `HMoveTo` function with the following parameters: `Target(HMoveToComponent)`, `Actor Ref`, `Volume Ref`, and `Tolerance Ref(50 to walk and over 50 to fly)`.
 
 ![blueprint](https://github.com/user-attachments/assets/a16f0eab-6e16-426a-b5d2-c4278f6ba00a)
 
@@ -151,8 +152,15 @@ In C++, follow these steps:
     PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput", "H3DPathfinding" });
     ```
 
+
+
 ## Tutorial Video
 [![H3DPathfinding Plugin Tutorial](https://github.com/yourusername/yourrepositoryname/raw/main/images/plugin2_resized_thumbnail.png)](https://www.youtube.com/watch?v=51_4N3GaQ9c)
+
+## Potential Issues
+
+- **Issue with ThirdPerson Map**: The plugin may encounter issues on the default ThirdPerson map. If you experience problems, try testing on a different map.
+
 
 
 
