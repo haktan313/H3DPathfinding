@@ -4,6 +4,7 @@
 
 ## Introduction
 This plugin allows characters in Unreal Engine to navigate 3D environments, detecting and avoiding obstacles dynamically, and finding the shortest 3D path to their target, whether in flying or walking mode.
+In future updates, this system will be compatible with my custom AI system and Behavior Tree framework, which I developed in Unreal Engine.
 
 ## Contents
 
