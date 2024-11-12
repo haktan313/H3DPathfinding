@@ -64,6 +64,8 @@ This plugin allows both walking and flying modes, customized through Character M
   
 - **Smooth Path Optimization**: Reduces unnecessary nodes for smoother paths.
 
+- **Alternative Target Selection**: If the end location is occupied, the system automatically selects the nearest available grid within a specified range as the new endpoint, ensuring the character can reach an accessible location close to the original target.
+
 ## Architecture and Structure
 
 This plugin uses a **grid-based volume** for pathfinding and employs an advanced **A* algorithm** and **dynamic obstacle detection** system. It enables characters to navigate to their target in both flying and walking modes.
