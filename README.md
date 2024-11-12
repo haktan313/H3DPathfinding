@@ -1,6 +1,6 @@
 # H3DPathfinding
 # H3DPathfinding Plugin Documentation
-![plugin](https://github.com/user-attachments/assets/3e35d7ed-cd59-475a-b957-77b129184313)
+![plugin2](https://github.com/user-attachments/assets/0666c145-b0f7-412e-ae80-6483a3ec8195)
 
 ## Introduction
 This plugin allows characters in Unreal Engine to navigate 3D environments, detecting and avoiding obstacles dynamically, and finding the shortest 3D path to their target, whether in flying or walking mode.
@@ -83,14 +83,14 @@ This plugin uses a **grid-based volume** for pathfinding and employs an advanced
 Objects or actors with the DynamicObjectComponent affect the grids within the volume as they move.
 These objects update the status of grids they occupy, marking them as occupied or free based on their movement. To configure a dynamic object, follow these steps:
 
-1. Ensure the object has a **DynamicObjectComponent**.  ![dinamicobjectcomponent](https://github.com/user-attachments/assets/a9af3721-620f-4ede-9ba1-995c40b4c28a)
+1. Ensure the object has a **DynamicObjectComponent**.  ![component](https://github.com/user-attachments/assets/c80a66ed-f54f-4f14-94b0-9934fc70cf46)
 
 2. Set **Mobility** to **Movable**.![mobilitychange](https://github.com/user-attachments/assets/d06e51f0-b66b-4cee-8c5f-0c556698cc62)
-3. In **Project Settings > Collision**, create a **Trace Channel** named "Dynamicbject" with **Default Response** set to **Ignore**.![createtrace1](https://github.com/user-attachments/assets/f13d3fc7-f09b-4b1c-8391-f69cd91851d9)
-![creastetrace2](https://github.com/user-attachments/assets/f2b4bea3-ec6f-46c9-9a4f-a3f96bb4bee1)
+3. In **Project Settings > Collision**, create a **Trace Channel** named "Dynamicbject" with **Default Response** set to **Ignore**.![trace1](https://github.com/user-attachments/assets/4c5266c4-28d0-40d6-8732-cee44ca6da6b)
+![traceignore](https://github.com/user-attachments/assets/8040e26c-9a9b-46c5-b054-f3d578cb4ef7)
 
 
-4. In the object's **Collision Presets**, set the DinamicObject channel to **Block**.![dinamic object trace open](https://github.com/user-attachments/assets/28e4657c-108c-47a6-a39b-16384c7e8fc8)
+4. In the object's **Collision Presets**, set the DinamicObject channel to **Block**.![blıock](https://github.com/user-attachments/assets/134e5587-b5d0-4d53-89dd-067ee7466b7f)
 
 5. Enable **Generate Overlap Events** for the object.![generateoverlapevents](https://github.com/user-attachments/assets/5965b8d6-ddf0-420b-a411-05150fa115a5)
 
