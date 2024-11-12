@@ -152,7 +152,8 @@ In C++, follow these steps:
     ```
 
 ## Tutorial Video
-[![H3DPathfinding Plugin Tutorial](https://youtu.be/51_4N3GaQ9c)
+[![H3DPathfinding Plugin Tutorial](https://github.com/yourusername/yourrepositoryname/raw/main/images/plugin2_resized_thumbnail.png)](https://www.youtube.com/watch?v=51_4N3GaQ9c)
+
 
 
 
