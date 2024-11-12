@@ -1,5 +1,6 @@
 # H3DPathfinding
 # H3DPathfinding Plugin Documentation
+![plugin](https://github.com/user-attachments/assets/3e35d7ed-cd59-475a-b957-77b129184313)
 
 ## Introduction
 This plugin enables characters in Unreal Engine to navigate 3D environments, reaching targets along the shortest path while dynamically detecting and updating for both static and moving obstacles in walk and fly modes.
