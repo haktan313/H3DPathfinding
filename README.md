@@ -20,6 +20,7 @@ This plugin allows characters in Unreal Engine to navigate 3D environments, dete
   - [Core Components](#core-components)
 - [Dynamic Objects](#dynamic-objects)
 - [Blueprint and C++ Setup Examples](#blueprint-and-c-setup-examples)
+- [Tutorial Video](#tutorial-video)
 
 ## Supported Versions
 This plugin is compatible with Unreal Engine 5.2 and later and is designed to work in both Blueprint and C++ projects.
