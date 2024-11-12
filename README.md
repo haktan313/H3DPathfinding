@@ -3,10 +3,10 @@
 ![plugin](https://github.com/user-attachments/assets/3e35d7ed-cd59-475a-b957-77b129184313)
 
 ## Introduction
-This plugin enables characters in Unreal Engine to navigate 3D environments, reaching targets along the shortest path while dynamically detecting and updating for both static and moving obstacles in walk and fly modes.
+This plugin allows characters in Unreal Engine to navigate 3D environments, detecting and avoiding obstacles dynamically, and finding the shortest 3D path to their target, whether in flying or walking mode.
 
 ## Supported Versions
-This plugin is compatible with Unreal Engine 5.2 and above, and is designed to work in both **Blueprint** and **C++** projects.
+This plugin is compatible with Unreal Engine 5.2 and later and is designed to work in both Blueprint and C++ projects.
 
 ## Installation Instructions
 
@@ -48,22 +48,30 @@ This plugin uses a **grid-based volume** for pathfinding and employs an advanced
 
 ### Core Components
 
-- **Volume**: Represents the grid-based volume for pathfinding. The volume is subdivided based on the presence of objects, marking each grid as either full or empty.
+- **Volume**: RRepresents the grid-based volume where pathfinding operations are performed. The volume’s grids can be subdivided based on surrounding objects, marking each grid as not free or free.
 
-- **Core**: Calculates the shortest path using the A* algorithm. When dynamic obstacles are detected, Core recalculates the route in real-time and finds the smoothest path possible.
+- **Core**: Calculates the shortest path to the target using the A* algorithm. When dynamic obstacles are detected and they are moving, the Core recalculates the path in real-time. It also smooths the path and selects an alternative nearby target if the original target is blocked.
 
-- **MoveToComponent**: Initiates pathfinding requests for the character and manages movement. It uses Unreal Engine's Character Movement Component for seamless navigation.
+- **MoveToComponent**: Manages pathfinding requests and movement for the character. It uses Unreal Engine's Character Movement Component to ensure smooth navigation.!!!!!!!!!
 
-- **DinamicObjectComponent**: Used to classify dynamic objects and updates the grids they occupy as full or empty. Automatically triggers pathfinding updates when objects move.
+- **DinamicObjectComponent**: Used to classify dynamic objects and allows them to mark grids they occupy as either full or empty. It automatically updates the pathfinding algorithm when objects move.
 
 ### Dynamic Objects
 
-To configure dynamic objects that interact with the grid:
-1. Ensure the object has a **DinamicObjectComponent**.
-2. Set **Mobility** to **Movable**.
-3. In **Project Settings > Collision**, create a **Trace Channel** named "DinamicObject" with **Default Response** set to **Ignore**.
-4. In the object's **Collision Presets**, set the DinamicObject channel to **Block**.
-5. Enable **Generate Overlap Events** for the object.
+Objects or actors with the DinamicObjectComponent affect the grids within the volume as they move.
+These objects update the status of grids they occupy, marking them as occupied or free based on their movement. To configure a dynamic object, follow these steps:
+
+1. Ensure the object has a **DinamicObjectComponent**.  ![dinamicobjectcomponent](https://github.com/user-attachments/assets/a9af3721-620f-4ede-9ba1-995c40b4c28a)
+
+2. Set **Mobility** to **Movable**.![mobilitychange](https://github.com/user-attachments/assets/d06e51f0-b66b-4cee-8c5f-0c556698cc62)
+3. In **Project Settings > Collision**, create a **Trace Channel** named "DinamicObject" with **Default Response** set to **Ignore**.![createtrace1](https://github.com/user-attachments/assets/f13d3fc7-f09b-4b1c-8391-f69cd91851d9)
+![creastetrace2](https://github.com/user-attachments/assets/f2b4bea3-ec6f-46c9-9a4f-a3f96bb4bee1)
+
+
+4. In the object's **Collision Presets**, set the DinamicObject channel to **Block**.![dinamic object trace open](https://github.com/user-attachments/assets/28e4657c-108c-47a6-a39b-16384c7e8fc8)
+
+5. Enable **Generate Overlap Events** for the object.![generateoverlapevents](https://github.com/user-attachments/assets/5965b8d6-ddf0-420b-a411-05150fa115a5)
+
 
 When configured, dynamic objects update grid status as they move. The pathfinding system adjusts routes in real-time based on these updates.
 
