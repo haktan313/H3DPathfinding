@@ -76,17 +76,17 @@ This plugin uses a **grid-based volume** for pathfinding and employs an advanced
 
 - **MoveToComponent**: Manages pathfinding requests and movement for the character. It uses Unreal Engine's Character Movement Component to ensure smooth navigation.!!!!!!!!!
 
-- **DinamicObjectComponent**: Used to classify dynamic objects and allows them to mark grids they occupy as either full or empty. It automatically updates the pathfinding algorithm when objects move.
+- **DynamicObjectComponent**: Used to classify dynamic objects and allows them to mark grids they occupy as either full or empty. It automatically updates the pathfinding algorithm when objects move.
 
 ### Dynamic Objects
 
-Objects or actors with the DinamicObjectComponent affect the grids within the volume as they move.
+Objects or actors with the DynamicObjectComponent affect the grids within the volume as they move.
 These objects update the status of grids they occupy, marking them as occupied or free based on their movement. To configure a dynamic object, follow these steps:
 
-1. Ensure the object has a **DinamicObjectComponent**.  ![dinamicobjectcomponent](https://github.com/user-attachments/assets/a9af3721-620f-4ede-9ba1-995c40b4c28a)
+1. Ensure the object has a **DynamicObjectComponent**.  ![dinamicobjectcomponent](https://github.com/user-attachments/assets/a9af3721-620f-4ede-9ba1-995c40b4c28a)
 
 2. Set **Mobility** to **Movable**.![mobilitychange](https://github.com/user-attachments/assets/d06e51f0-b66b-4cee-8c5f-0c556698cc62)
-3. In **Project Settings > Collision**, create a **Trace Channel** named "DinamicObject" with **Default Response** set to **Ignore**.![createtrace1](https://github.com/user-attachments/assets/f13d3fc7-f09b-4b1c-8391-f69cd91851d9)
+3. In **Project Settings > Collision**, create a **Trace Channel** named "Dynamicbject" with **Default Response** set to **Ignore**.![createtrace1](https://github.com/user-attachments/assets/f13d3fc7-f09b-4b1c-8391-f69cd91851d9)
 ![creastetrace2](https://github.com/user-attachments/assets/f2b4bea3-ec6f-46c9-9a4f-a3f96bb4bee1)
 
 
