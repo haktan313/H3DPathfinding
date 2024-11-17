@@ -5,6 +5,8 @@
 ## Introduction
 This plugin allows characters in Unreal Engine to navigate 3D environments, detecting and avoiding obstacles dynamically, and finding the shortest 3D path to their target, whether in flying or walking mode.
 
+-In future updates, this system will be compatible with my custom AI system and Behavior Tree framework, which I developed in Unreal Engine.
+
 ## Contents
 
 - [Supported Versions](#supported-versions)
@@ -18,6 +20,8 @@ This plugin allows characters in Unreal Engine to navigate 3D environments, dete
   - [Core Components](#core-components)
 - [Dynamic Objects](#dynamic-objects)
 - [Blueprint and C++ Setup Examples](#blueprint-and-c-setup-examples)
+- [Tutorial Video](#tutorial-video)
+- [Potential Issues](#potential-issues)
 
 ## Supported Versions
 This plugin is compatible with Unreal Engine 5.2 and later and is designed to work in both Blueprint and C++ projects.
@@ -36,14 +40,16 @@ This plugin is compatible with Unreal Engine 5.2 and later and is designed to wo
 
 ## Workflow
 
-### 1. Volume and Grid Division
-**AHVolume3D** divides the volume into grids, marking each as full or empty for efficient pathfinding calculations.
+![volume](https://github.com/user-attachments/assets/b57a3671-9d01-4cd4-b261-46e5bbb11b5f)
+### 1. Volume and Grid Division 
+**AHVolume3D** divides the volume into grids, marking each as full or empty for efficient pathfinding calculations. 
 
-### 2. Pathfinding and Obstacle Detection
+![core](https://github.com/user-attachments/assets/4c82a512-78ea-4f48-b69d-63c8cbec5e9d)
+### 2. Pathfinding and Obstacle Detection 
 **AHPathCore** uses A* to find the shortest path, recalculating in real-time when obstacles appear.
 
-### 3. Movement Modes
-This plugin allows both walking and flying modes, customized through Character Movement Component.This makes it easy to adjust parameters such as speed, acceleration, and movement style.
+### 3. Movement Modes ![moveto](https://github.com/user-attachments/assets/62e16a9e-ddf8-4298-a4ee-d1ab36a36276)
+This plugin allows both walking and flying modes, customized through Character Movement Component.This makes it easy to adjust parameters such as speed, acceleration, and movement style. 
 
 - **Walking Mode**: Moves character along same-level grids, navigating small obstacles and sloped surfaces.
 - **Flying Mode**: The character can freely move in all directions within the 3D space, with no vertical limitations.
@@ -64,18 +70,34 @@ This plugin allows both walking and flying modes, customized through Character M
   
 - **Smooth Path Optimization**: Reduces unnecessary nodes for smoother paths.
 
+- **Alternative Target Selection**: If the end location is occupied, the system automatically selects the nearest available grid within a specified range as the new endpoint, ensuring the character can reach an accessible location close to the original target.
+
 ## Architecture and Structure
 
 This plugin uses a **grid-based volume** for pathfinding and employs an advanced **A* algorithm** and **dynamic obstacle detection** system. It enables characters to navigate to their target in both flying and walking modes.
 
 ### Core Components
 
-- **Volume**: RRepresents the grid-based volume where pathfinding operations are performed. The volume’s grids can be subdivided based on surrounding objects, marking each grid as not free or free.
 
+
+![volume](https://github.com/user-attachments/assets/b57a3671-9d01-4cd4-b261-46e5bbb11b5f)
+- **Volume**: RRepresents the grid-based volume where pathfinding operations are performed. The volume’s grids can be subdivided based on surrounding objects, marking each grid as not free or free.
+  
+  -**Draw Debug Grids from Player**(varaible(bool)): When enabled, this variable visualizes grids around the player, showing nearby navigable areas for debugging purposes.
+
+![core](https://github.com/user-attachments/assets/4c82a512-78ea-4f48-b69d-63c8cbec5e9d)
 - **Core**: Calculates the shortest path to the target using the A* algorithm. When dynamic obstacles are detected and they are moving, the Core recalculates the path in real-time. It also smooths the path and selects an alternative nearby target if the original target is blocked.
 
-- **MoveToComponent**: Manages pathfinding requests and movement for the character. It uses Unreal Engine's Character Movement Component to ensure smooth navigation.!!!!!!!!!
+![moveto](https://github.com/user-attachments/assets/62e16a9e-ddf8-4298-a4ee-d1ab36a36276)
+- **MoveToComponent**: Manages pathfinding requests and movement for the character. It uses Unreal Engine's Character Movement Component to ensure smooth navigation.
+  
+  -**TargetLocation**(varaible(Vector)): Set the target location for the character to reach.
+  
+  -**Draw Debug Line**(varaible(bool)): When enabled, this variable displays the path line from the character to the target, useful for visualizing the calculated path.
+  
+  -**Debug Line Duration**(varaible(float)): Sets the duration (in seconds) for how long the debug line remains visible. A value of -1 makes the line persist indefinitely.
 
+![component](https://github.com/user-attachments/assets/17d5948f-e075-4371-a704-0d91612a2f17)
 - **DynamicObjectComponent**: Used to classify dynamic objects and allows them to mark grids they occupy as either full or empty. It automatically updates the pathfinding algorithm when objects move.
 
 ### Dynamic Objects
@@ -100,7 +122,7 @@ When configured, dynamic objects update grid status as they move. The pathfindin
 ## Blueprint and C++ Setup Examples
 
 ### Blueprint Usage
-To move the character towards a target in Blueprint, call the `HMoveTo` function with the following parameters: `Target(HMoveToComponent)`, `Actor Ref`, `Volume Ref`, and `Tolerance Ref`.
+To move the character towards a target in Blueprint, call the `HMoveTo` function with the following parameters: `Target(HMoveToComponent)`, `Actor Ref`, `Volume Ref`, and `Tolerance Ref(50 to walk and over 50 to fly)`.
 
 ![blueprint](https://github.com/user-attachments/assets/a16f0eab-6e16-426a-b5d2-c4278f6ba00a)
 
@@ -129,5 +151,18 @@ In C++, follow these steps:
     ```csharp
     PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput", "H3DPathfinding" });
     ```
+
+
+
+## Tutorial Video
+[![H3DPathfinding Plugin Tutorial](https://github.com/yourusername/yourrepositoryname/raw/main/images/plugin2_resized_thumbnail.png)](https://www.youtube.com/watch?v=51_4N3GaQ9c)
+
+## Potential Issues
+
+- **Issue with ThirdPerson Map**: The plugin may encounter issues on the default ThirdPerson map. If you experience problems, try testing on a different map.
+
+
+
+
 
 
