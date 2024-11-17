@@ -15,13 +15,14 @@ class H3DPATHFINDING_API UHMoveToComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MoveToComponent")
 	FVector TargetLocation;//Target location of the actor.
-	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite ,Category = "MoveToComponent")
 	bool bDrawDebugLine = true;//If the debug line should be drawn or not.
-	UPROPERTY(EditAnywhere, Category = "MoveToComponent")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite ,Category = "MoveToComponent")
 	float DebugLineDuration = -1.0f;//Duration of the debug line. -1 means infinite duration.
-	
+private:	
 	TArray<FVector> PathPoints;//Array of the points in the path.
 	
 	int32 CurrentPathIndex = 0;//Index of the current point in the path.
