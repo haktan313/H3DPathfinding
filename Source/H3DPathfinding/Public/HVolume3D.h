@@ -1,5 +1,3 @@
-// HVolume3D.h
-// It is a volume that divides the world into grids and finds the path between two points.
 
 #pragma once
 
@@ -10,45 +8,49 @@
 #include "HPathCore.h"
 #include "HVolume3D.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGridsUpdated);//Delegate for when the grids are updated by DinamicObjects.
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGridsUpdated);//delegate for when the grids are updated by DinamicObjects
 
 UCLASS()
 class H3DPATHFINDING_API AHVolume3D : public AActor
 {
     GENERATED_BODY()
 
-    class UBoxComponent* VolumeBox;//Box component for the volume.
+    UPROPERTY()
+    class UBoxComponent* VolumeBox;
 
-    FVector OriginOfVolume; //Origin of the volume.
-    FVector BoxExtent; //Extent of the volume.
+    FVector OriginOfVolume;
+    FVector BoxExtent;
     
-    int32 CellsAtX;//Number of cells at X axis.
-    int32 CellsAtY;//Number of cells at Y axis.
-    int32 CellsAtZ;//Number of cells at Z axis.
+    int32 CellsAtX;
+    int32 CellsAtY;
+    int32 CellsAtZ;
 
-    TMap<FVector, FS_GridCellsID*> AllGridsMap;//Map of all the grids.
-    TArray<FVector> CellsPosition;//Array of the positions of the cells.
-    TArray<FVector> UpdateCellsPosition;//Array of the positions of the cells that updated and coming from CellsPosition.
+    TMap<FVector, FS_GridCellsID*> AllGridsMap;
+    TArray<FVector> CellsPosition;
+    TArray<FVector> UpdateCellsPosition;
     
-    int32 GridIDCounter = 0;//Counter for the grid IDs.
-    
-    AHPathCore* PathCore = nullptr;//Reference to the path core.
+    int32 GridIDCounter = 0;
+
+    UPROPERTY()
+    AHPathCore* PathCore = nullptr;
 
     FCriticalSection AllGridsMapRefMutex;
 
 public:
 
-    float CellSize = 60.0f;//Size of the cell.
-    float MinCellSize = 30.f;//Minimum size of the cell.
-    float MaxDebugDrawDistance = 500.0f;//Maximum distance for drawing debug grid.
-    
-    TArray<AActor*> DynamicObjects;//Array of the dinamic objects.
-    TMap<AActor*, FVector> DynamicObjectsLastPosition;//Map of the last positions of the dinamic objects.
+    float CellSize = 60.0f;
+    float MinCellSize = 30.f;
+    float MaxDebugDrawDistance = 500.0f;
 
-    FOnGridsUpdated OnGridsUpdated;//Delegate for when the grids are updated by DinamicObjects.
+    UPROPERTY()
+    TArray<AActor*> DynamicObjects;
+    UPROPERTY()
+    TMap<AActor*, FVector> DynamicObjectsLastPosition;
+
+    FOnGridsUpdated OnGridsUpdated;
 
     UPROPERTY(EditAnywhere, Category = "Shape")
-    bool bDrawDebugGridsFromPlayer = false;//Draw debug grids from player.
+    bool bDrawDebugGridsFromPlayer = false;
 
 private:
     
@@ -57,23 +59,23 @@ private:
     virtual void Tick(float DeltaTime) override;
     void DrawDebugGrid(const FVector& PlayerLocation, float DrawDistance);
     
-    void DivideVolumeIntoGrids();//Divide the volume into grids.
-    void DivideGridsIntoSmallerGrids(const TArray<FVector>& CellPositionRefs, float SmallerCellSize, TMap<FVector, FS_GridCellsID*>AllGridsMapRef);//Divide the grids into smaller grids.
+    void DivideVolumeIntoGrids();
+    void DivideGridsIntoSmallerGrids(const TArray<FVector>& CellPositionRefs, float SmallerCellSize, TMap<FVector, FS_GridCellsID*>AllGridsMapRef);
 
 public:
 
-    void StartUpdateGrids();//Start updating the grids.
+    void StartUpdateGrids();
 
 private:
     
     FTimerHandle UpdateGridTimerHandle;
     bool bCanUpdateGrids = true;
-    void UpdateGrids();//Update the grids.
-    void TestGrids(TArray<FVector> gridsPositions);//Test the grids.
-    void UpdateGridsStatus(TArray<FVector> cellsPositions);//Update the status of the grids.
+    void UpdateGrids();
+    void TestGrids(TArray<FVector> gridsPositions);
+    void UpdateGridsStatus(TArray<FVector> cellsPositions);
 
 public:
     
-    void FindPath(UObject* CallingObject, const FName& FunctionName, FVector Start, FVector End, bool bIsWalking, float CharacterRadius, float CharacterHalfHeight, AActor* OwnerRef);//Find the path between two points.
-    int32 GetGridIDFromPosition(const FVector& Position) const;//Get the grid ID from the position.
+    void FindPath(UObject* CallingObject, const FName& FunctionName, FVector Start, FVector End, bool bIsWalking, float CharacterRadius, float CharacterHalfHeight, AActor* OwnerRef);
+    int32 GetGridIDFromPosition(const FVector& Position) const;
 };

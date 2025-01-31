@@ -9,7 +9,11 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeHVolume3D() {}
 // Cross Module References
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
+	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UBoxComponent_NoRegister();
+	H3DPATHFINDING_API UClass* Z_Construct_UClass_AHPathCore_NoRegister();
 	H3DPATHFINDING_API UClass* Z_Construct_UClass_AHVolume3D();
 	H3DPATHFINDING_API UClass* Z_Construct_UClass_AHVolume3D_NoRegister();
 	H3DPATHFINDING_API UFunction* Z_Construct_UDelegateFunction_H3DPathfinding_OnGridsUpdated__DelegateSignature();
@@ -56,6 +60,25 @@ void FOnGridsUpdated_DelegateWrapper(const FMulticastScriptDelegate& OnGridsUpda
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_VolumeBox_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_VolumeBox;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PathCore_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PathCore;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_DynamicObjects_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DynamicObjects_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_DynamicObjects;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_DynamicObjectsLastPosition_ValueProp;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_DynamicObjectsLastPosition_Key_KeyProp;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DynamicObjectsLastPosition_MetaData[];
+#endif
+		static const UECodeGen_Private::FMapPropertyParams NewProp_DynamicObjectsLastPosition;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bDrawDebugGridsFromPlayer_MetaData[];
 #endif
 		static void NewProp_bDrawDebugGridsFromPlayer_SetBit(void* Obj);
@@ -70,18 +93,44 @@ void FOnGridsUpdated_DelegateWrapper(const FMulticastScriptDelegate& OnGridsUpda
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHVolume3D_Statics::Class_MetaDataParams[] = {
-		{ "Comment", "//Delegate for when the grids are updated by DinamicObjects.\n" },
+		{ "Comment", "//delegate for when the grids are updated by DinamicObjects\n" },
 		{ "IncludePath", "HVolume3D.h" },
 		{ "ModuleRelativePath", "Public/HVolume3D.h" },
-		{ "ToolTip", "Delegate for when the grids are updated by DinamicObjects." },
+		{ "ToolTip", "delegate for when the grids are updated by DinamicObjects" },
 	};
 #endif
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHVolume3D_Statics::NewProp_VolumeBox_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/HVolume3D.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_VolumeBox = { "VolumeBox", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AHVolume3D, VolumeBox), Z_Construct_UClass_UBoxComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AHVolume3D_Statics::NewProp_VolumeBox_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHVolume3D_Statics::NewProp_VolumeBox_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHVolume3D_Statics::NewProp_PathCore_MetaData[] = {
+		{ "ModuleRelativePath", "Public/HVolume3D.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_PathCore = { "PathCore", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AHVolume3D, PathCore), Z_Construct_UClass_AHPathCore_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AHVolume3D_Statics::NewProp_PathCore_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHVolume3D_Statics::NewProp_PathCore_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects_Inner = { "DynamicObjects", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects_MetaData[] = {
+		{ "ModuleRelativePath", "Public/HVolume3D.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects = { "DynamicObjects", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AHVolume3D, DynamicObjects), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects_MetaData)) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_ValueProp = { "DynamicObjectsLastPosition", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 1, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_Key_KeyProp = { "DynamicObjectsLastPosition_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_MetaData[] = {
+		{ "ModuleRelativePath", "Public/HVolume3D.h" },
+	};
+#endif
+	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition = { "DynamicObjectsLastPosition", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AHVolume3D, DynamicObjectsLastPosition), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer_MetaData[] = {
 		{ "Category", "Shape" },
-		{ "Comment", "//Delegate for when the grids are updated by DinamicObjects.\n" },
 		{ "ModuleRelativePath", "Public/HVolume3D.h" },
-		{ "ToolTip", "Delegate for when the grids are updated by DinamicObjects." },
 	};
 #endif
 	void Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer_SetBit(void* Obj)
@@ -90,6 +139,13 @@ void FOnGridsUpdated_DelegateWrapper(const FMulticastScriptDelegate& OnGridsUpda
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer = { "bDrawDebugGridsFromPlayer", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AHVolume3D), &Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer_SetBit, METADATA_PARAMS(Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AHVolume3D_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_VolumeBox,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_PathCore,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjects,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_ValueProp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition_Key_KeyProp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_DynamicObjectsLastPosition,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHVolume3D_Statics::NewProp_bDrawDebugGridsFromPlayer,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AHVolume3D_Statics::StaticCppClassTypeInfo = {
@@ -124,15 +180,15 @@ void FOnGridsUpdated_DelegateWrapper(const FMulticastScriptDelegate& OnGridsUpda
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AHVolume3D);
 	AHVolume3D::~AHVolume3D() {}
-	struct Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AHVolume3D, AHVolume3D::StaticClass, TEXT("AHVolume3D"), &Z_Registration_Info_UClass_AHVolume3D, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AHVolume3D), 2498465054U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AHVolume3D, AHVolume3D::StaticClass, TEXT("AHVolume3D"), &Z_Registration_Info_UClass_AHVolume3D, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AHVolume3D), 1845595154U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_806454852(TEXT("/Script/H3DPathfinding"),
-		Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_434361848(TEXT("/Script/H3DPathfinding"),
+		Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HVolume3D_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

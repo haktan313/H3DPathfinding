@@ -1,4 +1,3 @@
-//MoveToComponent.cpp
 
 #include "HMoveToComponent.h"
 #include "GameFramework/Character.h"
@@ -9,14 +8,14 @@
 #include "Async/Async.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-// Sets default values for this component's properties and starts the pathfinding process.
+
 void UHMoveToComponent::HMoveTo(AActor* ActorRef, AHVolume3D* VolumeRef, float ToleranceRef)
 {
 	if(!bCanFindPath)
 	{
 		return;
 	}
-	if(!VolumeRef)//If the volume is not valid, return.
+	if(!VolumeRef)
 	{
 		return;
 	}
@@ -34,22 +33,21 @@ void UHMoveToComponent::CooldownForFindPath()
 	bCanFindPath = true;
 }
 
-//When path is found, this function is called by OnPathFound delegate.
 void UHMoveToComponent::OnPathFound(const FS_PathResult& Result)
 {
-	if (Result.bSuccess)//If the path is found.
+	if (Result.bSuccess)
 	{
-		Volume->OnGridsUpdated.AddDynamic(this, &UHMoveToComponent::CheckAvailability);//Bind the CheckAvailability function to OnGridsUpdated delegate.
+		Volume->OnGridsUpdated.AddDynamic(this, &UHMoveToComponent::CheckAvailability);
 		
-		GetWorld()->GetTimerManager().SetTimer(MoveToTimerHandle, this, &UHMoveToComponent::MoveToTick, 0.001f, true);//Start the timer to move the actor to the target location.
-		GetWorld()->GetTimerManager().SetTimer(CooldownForFindPathTimerHandle, this, &UHMoveToComponent::CooldownForFindPath, 0.5f, false);//Start the cooldown for finding the path.
+		GetWorld()->GetTimerManager().SetTimer(MoveToTimerHandle, this, &UHMoveToComponent::MoveToTick, 0.001f, true);
+		GetWorld()->GetTimerManager().SetTimer(CooldownForFindPathTimerHandle, this, &UHMoveToComponent::CooldownForFindPath, 0.5f, false);
 		
-		PathPoints = Result.PathPoints;//Set the path points.
-		CurrentPathIndex = 0;//Set the current path index to 0.
+		PathPoints = Result.PathPoints;
+		CurrentPathIndex = 0;
 
 		if(bDrawDebugLine)
 		{
-			for (int32 i = 0; i < PathPoints.Num() - 1; ++i)//Draw the path points.
+			for (int32 i = 0; i < PathPoints.Num() - 1; ++i)
 			{
 				DrawDebugLine(GetWorld(), PathPoints[i], PathPoints[i + 1], FColor::Blue, true, DebugLineDuration, 0, 2.0f);
 			}
@@ -57,16 +55,15 @@ void UHMoveToComponent::OnPathFound(const FS_PathResult& Result)
 	}
 }
 
-//Check if the path is available or not when dinamic obstacles are moving. Called by OnGridsUpdated delegate.
 void UHMoveToComponent::CheckAvailability()
 {
-	if(CurrentPathIndex == 0)//If the actor is not moving, return.
+	if(CurrentPathIndex == 0)
 	{
 		return;
 	}
-	if(!bCanCheckAvailability)//If the availability of the path cannot be checked, return.
+	if(!bCanCheckAvailability)
 	{
-		if(!bIsCheckAvailabiliyCalled)//If the CheckAvailability function is not called while the availability of the path cannot be checked, set the bIsCheckAvailabiliyCalled to true.
+		if(!bIsCheckAvailabiliyCalled)
 		{
 			bIsCheckAvailabiliyCalled = true;
 		}
@@ -75,10 +72,10 @@ void UHMoveToComponent::CheckAvailability()
 	Async(EAsyncExecution::ThreadPool,[this]()
 	{
 		bool bIsHit = false;
-		for(int32 i = CurrentPathIndex - 1; i < PathPoints.Num() -1; i++)//Check the path points from the current path index to the end.
+		for(int32 i = CurrentPathIndex - 1; i < PathPoints.Num() -1; i++)
 		{
-			FVector Start = PathPoints[i];//Start point of the path.
-			FVector End = PathPoints[i + 1];//End point of
+			FVector Start = PathPoints[i];
+			FVector End = PathPoints[i + 1];
 
 			FHitResult HitResult;
 			FCollisionQueryParams CollisionParams;
@@ -104,11 +101,11 @@ void UHMoveToComponent::CheckAvailability()
 		{
 			if(bIsHit)
 			{
-				CharacterRef->GetCharacterMovement()->StopMovementImmediately();//Stop the actor's movement.
-				Volume->OnGridsUpdated.RemoveDynamic(this, &UHMoveToComponent::CheckAvailability);//Unbind the CheckAvailability function from OnGridsUpdated delegate.
+				CharacterRef->GetCharacterMovement()->StopMovementImmediately();
+				Volume->OnGridsUpdated.RemoveDynamic(this, &UHMoveToComponent::CheckAvailability);
 				bCanCheckAvailability = false;
-				HMoveTo(Actor,Volume, Tolerance);//Find the path again.
-				GetWorld()->GetTimerManager().SetTimer(CooldownForCheckAvailabilityTimerHandle, this, &UHMoveToComponent::CooldownForCheckAvailability, 0.1f, false);//Start the cooldown for checking the availability of the path.
+				HMoveTo(Actor,Volume, Tolerance);
+				GetWorld()->GetTimerManager().SetTimer(CooldownForCheckAvailabilityTimerHandle, this, &UHMoveToComponent::CooldownForCheckAvailability, 0.1f, false);
 			}
 		});
 	});
@@ -117,18 +114,17 @@ void UHMoveToComponent::CheckAvailability()
 void UHMoveToComponent::CooldownForCheckAvailability()
 {
 	bCanCheckAvailability = true;
-	if(bIsCheckAvailabiliyCalled)//If the CheckAvailability function is called.
+	if(bIsCheckAvailabiliyCalled)
 	{
 		bIsCheckAvailabiliyCalled = false;
 		bCanFindPath = true;
-		CheckAvailability();//Check the availability of the path.
+		CheckAvailability();
 	}
 }
 
-//Move the actor to the target location.
 void UHMoveToComponent::MoveToTick()
 {
-	if (PathPoints.Num() > 0 && CurrentPathIndex < PathPoints.Num())//If the path is valid and the current path index is less than the path points.
+	if (PathPoints.Num() > 0 && CurrentPathIndex < PathPoints.Num())
 	{
 		FVector CurrentLocation = Actor->GetActorLocation();
 		FVector TargetPoint = PathPoints[CurrentPathIndex];
@@ -141,9 +137,9 @@ void UHMoveToComponent::MoveToTick()
 			CurrentPathIndex++;
 		}
 	}
-	if (CurrentPathIndex >= PathPoints.Num() && !bIsWalking)//If the actor is flying and reached the target location.
+	if (CurrentPathIndex >= PathPoints.Num() && !bIsWalking)
 	{
-		CharacterRef->GetCharacterMovement()->StopMovementImmediately();//Stop the actor's movement.
+		CharacterRef->GetCharacterMovement()->StopMovementImmediately();
 	}
 }
 

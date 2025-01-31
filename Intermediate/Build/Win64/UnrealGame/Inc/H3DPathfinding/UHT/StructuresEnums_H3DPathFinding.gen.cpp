@@ -73,9 +73,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_GridCellsID>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
-		{ "Comment", "//Structure for the grid cells.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Structure for the grid cells." },
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewStructOps()
@@ -92,27 +90,21 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_GridCellsID>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridPosition_MetaData[] = {
 		{ "Category", "GridCellsID" },
-		{ "Comment", "//Unique ID for the grid.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Unique ID for the grid." },
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridPosition = { "GridPosition", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_GridCellsID, GridPosition), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridPosition_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridPosition_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridSize_MetaData[] = {
 		{ "Category", "GridCellsID" },
-		{ "Comment", "//World position of the grid.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "World position of the grid." },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridSize = { "GridSize", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_GridCellsID, GridSize), METADATA_PARAMS(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridSize_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_GridSize_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_IsFree_MetaData[] = {
 		{ "Category", "GridCellsID" },
-		{ "Comment", "//Size of the grid.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Size of the grid." },
 	};
 #endif
 	void Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_IsFree_SetBit(void* Obj)
@@ -123,9 +115,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_GridCellsID>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_IsDivided_MetaData[] = {
 		{ "Category", "GridCellsID" },
-		{ "Comment", "//If the grid is free or not.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "If the grid is free or not." },
 	};
 #endif
 	void Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_IsDivided_SetBit(void* Obj)
@@ -136,9 +126,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_GridCellsID>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ParentGridID_MetaData[] = {
 		{ "Category", "GridCellsID" },
-		{ "Comment", "//If the grid is divided into smaller grids or not.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "If the grid is divided into smaller grids or not." },
 	};
 #endif
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ParentGridID = { "ParentGridID", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_GridCellsID, ParentGridID), METADATA_PARAMS(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ParentGridID_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ParentGridID_MetaData)) };
@@ -146,9 +134,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_GridCellsID>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ChildGridIDs_MetaData[] = {
 		{ "Category", "GridCellsID" },
-		{ "Comment", "//Parent grid ID.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Parent grid ID." },
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ChildGridIDs = { "ChildGridIDs", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_GridCellsID, ChildGridIDs), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ChildGridIDs_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewProp_ChildGridIDs_MetaData)) };
@@ -218,9 +204,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_PathResult>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathResult_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
-		{ "Comment", "//Structure for the path result.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Structure for the path result." },
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FS_PathResult_Statics::NewStructOps()
@@ -238,9 +222,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_PathResult>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathResult_Statics::NewProp_bSuccess_MetaData[] = {
 		{ "Category", "PathResult" },
-		{ "Comment", "//Array of the points in the path.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Array of the points in the path." },
 	};
 #endif
 	void Z_Construct_UScriptStruct_FS_PathResult_Statics::NewProp_bSuccess_SetBit(void* Obj)
@@ -328,9 +310,7 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_PathRequest>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
-		{ "Comment", "//Structure for the path request.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Structure for the path request." },
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewStructOps()
@@ -347,45 +327,37 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_PathRequest>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_End_MetaData[] = {
 		{ "Category", "PathRequest" },
-		{ "Comment", "//Start location of the path.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Start location of the path." },
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_End = { "End", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_PathRequest, End), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_End_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_End_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_VolumeRef_MetaData[] = {
 		{ "Category", "PathRequest" },
-		{ "Comment", "//End location of the path.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "End location of the path." },
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_VolumeRef = { "VolumeRef", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_PathRequest, VolumeRef), Z_Construct_UClass_AHVolume3D_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_VolumeRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_VolumeRef_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterRadius_MetaData[] = {
 		{ "Category", "PathRequest" },
-		{ "Comment", "//Delegate for when the path is found.\n" },
+		{ "Comment", "//Delegate for when the path is found\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Delegate for when the path is found." },
+		{ "ToolTip", "Delegate for when the path is found" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterRadius = { "CharacterRadius", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_PathRequest, CharacterRadius), METADATA_PARAMS(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterRadius_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterRadius_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterHalfHeight_MetaData[] = {
 		{ "Category", "PathRequest" },
-		{ "Comment", "//Radius of the character.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Radius of the character." },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterHalfHeight = { "CharacterHalfHeight", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_PathRequest, CharacterHalfHeight), METADATA_PARAMS(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterHalfHeight_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_CharacterHalfHeight_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_bIsWalking_MetaData[] = {
 		{ "Category", "PathRequest" },
-		{ "Comment", "//Half height of the character.\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "Half height of the character." },
 	};
 #endif
 	void Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_bIsWalking_SetBit(void* Obj)
@@ -396,9 +368,9 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_PathRequest>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_Owner_MetaData[] = {
 		{ "Category", "PathRequest" },
-		{ "Comment", "//If the character is walking or flying.\n" },
+		{ "Comment", "//if the character is walking or flying\n" },
 		{ "ModuleRelativePath", "Public/StructuresEnums_H3DPathFinding.h" },
-		{ "ToolTip", "If the character is walking or flying." },
+		{ "ToolTip", "if the character is walking or flying" },
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_Owner = { "Owner", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FS_PathRequest, Owner), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_Owner_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewProp_Owner_MetaData)) };
@@ -432,17 +404,17 @@ template<> H3DPATHFINDING_API UScriptStruct* StaticStruct<FS_PathRequest>()
 		}
 		return Z_Registration_Info_UScriptStruct_S_PathRequest.InnerSingleton;
 	}
-	struct Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics
 	{
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 	};
-	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics::ScriptStructInfo[] = {
-		{ FS_GridCellsID::StaticStruct, Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewStructOps, TEXT("S_GridCellsID"), &Z_Registration_Info_UScriptStruct_S_GridCellsID, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FS_GridCellsID), 2225732418U) },
-		{ FS_PathResult::StaticStruct, Z_Construct_UScriptStruct_FS_PathResult_Statics::NewStructOps, TEXT("S_PathResult"), &Z_Registration_Info_UScriptStruct_S_PathResult, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FS_PathResult), 2741538086U) },
-		{ FS_PathRequest::StaticStruct, Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewStructOps, TEXT("S_PathRequest"), &Z_Registration_Info_UScriptStruct_S_PathRequest, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FS_PathRequest), 3369455136U) },
+	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics::ScriptStructInfo[] = {
+		{ FS_GridCellsID::StaticStruct, Z_Construct_UScriptStruct_FS_GridCellsID_Statics::NewStructOps, TEXT("S_GridCellsID"), &Z_Registration_Info_UScriptStruct_S_GridCellsID, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FS_GridCellsID), 1578695585U) },
+		{ FS_PathResult::StaticStruct, Z_Construct_UScriptStruct_FS_PathResult_Statics::NewStructOps, TEXT("S_PathResult"), &Z_Registration_Info_UScriptStruct_S_PathResult, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FS_PathResult), 596520602U) },
+		{ FS_PathRequest::StaticStruct, Z_Construct_UScriptStruct_FS_PathRequest_Statics::NewStructOps, TEXT("S_PathRequest"), &Z_Registration_Info_UScriptStruct_S_PathRequest, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FS_PathRequest), 4165119142U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_274059993(TEXT("/Script/H3DPathfinding"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_4148821631(TEXT("/Script/H3DPathfinding"),
 		nullptr, 0,
-		Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics::ScriptStructInfo),
+		Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_StructuresEnums_H3DPathFinding_h_Statics::ScriptStructInfo),
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

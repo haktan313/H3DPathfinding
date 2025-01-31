@@ -1,4 +1,4 @@
-//HVolume3D.cpp
+
 
 #include "HVolume3D.h"
 #include <Kismet/GameplayStatics.h>
@@ -22,13 +22,8 @@ AHVolume3D::AHVolume3D()
 void AHVolume3D::BeginPlay()
 {
     Super::BeginPlay();
-    PathCore = AHPathCore::GetInstance(GetWorld());//Get the singleton instance of the path core.
-    if(!PathCore)
-    {
-        UE_LOG(LogTemp, Error, TEXT("PathCore is null."));
-        return;
-    }
-    DivideVolumeIntoGrids();//Divide the volume into grids.
+    PathCore = AHPathCore::GetInstance(GetWorld());
+    DivideVolumeIntoGrids();
 }
 
 void AHVolume3D::Tick(float DeltaTime)
@@ -37,32 +32,29 @@ void AHVolume3D::Tick(float DeltaTime)
 
     if(bDrawDebugGridsFromPlayer)
     {
-        // Optional: Draw grid for debugging purposes
         APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
         APawn* PlayerPawn = PlayerController ? PlayerController->GetPawn() : nullptr;
 
         if (PlayerPawn)
         {
             FVector PlayerLocation = PlayerPawn->GetActorLocation();
-            float DrawDistance = 200.0f; // Distance within which grids will be drawn
+            float DrawDistance = 200.0f;
 
             DrawDebugGrid(PlayerLocation, DrawDistance);
         }
     }
 }
 
-//Draw the debug grid
 void AHVolume3D::DrawDebugGrid(const FVector& PlayerLocation, float DrawDistance)
 {
-    for (const auto& GridPair : AllGridsMap) // Iterating all grid cells in AllGridsMap
+    for (const auto& GridPair : AllGridsMap)
     {
-        const FS_GridCellsID* Grid = GridPair.Value; // Retrieving each grid cell from the map
+        const FS_GridCellsID* Grid = GridPair.Value;
         float DistanceToPlayer = FVector::Dist(PlayerLocation, Grid->GridPosition);
 
         if (DistanceToPlayer <= DrawDistance)
         {
-            // Setting color based on grid size
-            FColor GridColor = FColor::Green; // Default color
+            FColor GridColor = FColor::Green;
 
             if (FMath::IsNearlyEqual(Grid->GridSize, 60.0f, 1.0f))
             {
@@ -78,34 +70,30 @@ void AHVolume3D::DrawDebugGrid(const FVector& PlayerLocation, float DrawDistance
             }
             else
             {
-                // Different colors for other sizes or the default color
                 GridColor = FColor::Yellow;
             }
 
-            // Using a different color if the grid is not free
             if (!Grid->IsFree)
             {
-                GridColor = FColor::Red; // Red for blocked grids
+                GridColor = FColor::Red; 
             }
-
-            // Drawing the grid as a debug box
+            
             DrawDebugBox(GetWorld(), Grid->GridPosition, FVector(Grid->GridSize / 2), GridColor, false, -1.0f, 0, 1.0f);
         }
     }
 }
 
-// Divide the volume into grids
 void AHVolume3D::DivideVolumeIntoGrids()  
 {
-    BoxExtent = VolumeBox->GetScaledBoxExtent();//Get the extent of the box.
-    OriginOfVolume = VolumeBox->GetComponentLocation();//Get the origin of the volume.
+    BoxExtent = VolumeBox->GetScaledBoxExtent();
+    OriginOfVolume = VolumeBox->GetComponentLocation();
 
-    CellsAtX = FMath::CeilToInt((BoxExtent.X * 2) / CellSize);//Calculate the number of cells at X axis.
-    CellsAtY = FMath::CeilToInt((BoxExtent.Y * 2) / CellSize);//Calculate the number of cells at Y axis.
-    CellsAtZ = FMath::CeilToInt((BoxExtent.Z * 2) / CellSize);//Calculate the number of cells at Z axis.
+    CellsAtX = FMath::CeilToInt((BoxExtent.X * 2) / CellSize);//number of cells at X axis.
+    CellsAtY = FMath::CeilToInt((BoxExtent.Y * 2) / CellSize);//number of cells at Y axis.
+    CellsAtZ = FMath::CeilToInt((BoxExtent.Z * 2) / CellSize);//number of cells at Z axis.
 
-    TArray<FVector> HitGridPositions;//Array of the hit grid positions.
-    TMap<FVector, FS_GridCellsID*> AllGridsMapRef;//Map of all the grids.
+    TArray<FVector> HitGridPositions;
+    TMap<FVector, FS_GridCellsID*> AllGridsMapRef;
     
     for (int32 X = 0; X < CellsAtX; X++)
     {
@@ -133,86 +121,85 @@ void AHVolume3D::DivideVolumeIntoGrids()
                     FCollisionShape::MakeBox(CellExtent),
                     CollisionQueryParams);
 
-                FS_GridCellsID* NewGrid = new FS_GridCellsID();//Create a new grid.
+                FS_GridCellsID* NewGrid = new FS_GridCellsID();
                 NewGrid->GridPersonalID = ++GridIDCounter;
                 NewGrid->GridPosition = CellPosition;
                 NewGrid->GridSize = CellSize;
                 NewGrid->IsFree = !bHit;
                 
-                AllGridsMapRef.Add(CellPosition, NewGrid);//Add the grid to the map for dividing into smaller grids.
+                AllGridsMapRef.Add(CellPosition, NewGrid);
 
                 if (bHit)
                 {
                     bool bDynamicObject = false;
-                    for(FHitResult HitResult : HitResults)//Check if the hit actor has DynamicObjects component.
+                    for(FHitResult HitResult : HitResults)
                     {
-                        if(HitResult.GetActor()->FindComponentByClass<UHDynamicObjects>())//If the hit actor has HDynamicObjects component.
+                        if(HitResult.GetActor()->FindComponentByClass<UHDynamicObjects>())
                         {
                             bDynamicObject = true;
                             
-                            AllGridsMap.Add(CellPosition, NewGrid);//Add the grid to the map.
-                            DynamicObjects.Add(HitResult.GetActor());//Add the hit actor to the dynamic objects.
-                            DynamicObjectsLastPosition.Add(HitResult.GetActor(), HitResult.GetActor()->GetActorLocation());//Add the last position of the hit actor to the dynamic objects last position.
-                            CellsPosition.Add(CellPosition);//Add the cell position to the cells position for updating the grids.
+                            AllGridsMap.Add(CellPosition, NewGrid);
+                            DynamicObjects.Add(HitResult.GetActor());
+                            DynamicObjectsLastPosition.Add(HitResult.GetActor(), HitResult.GetActor()->GetActorLocation());
+                            CellsPosition.Add(CellPosition);
                             
-                            if(!GetWorld()->GetTimerManager().IsTimerActive(UpdateGridTimerHandle))//If the timer is not active.
+                            if(!GetWorld()->GetTimerManager().IsTimerActive(UpdateGridTimerHandle))
                             {
-                                StartUpdateGrids();//Start updating the grids.
+                                StartUpdateGrids();
                             }
                         }
                     }
                     if(!bDynamicObject)
                     {
-                        HitGridPositions.Add(CellPosition);//Add the hit grid position to the hit grid positions for dividing into smaller grids.
+                        HitGridPositions.Add(CellPosition);
                     }
                 }
                 else
                 {
-                    AllGridsMap.Add(CellPosition, NewGrid);//Add the grid to the map if it is free.
+                    AllGridsMap.Add(CellPosition, NewGrid);
                 }
             }
         }
     }
 
-    if (HitGridPositions.Num() > 0)//If there are hit grid positions.
+    if (HitGridPositions.Num() > 0)
     {
-        DivideGridsIntoSmallerGrids(HitGridPositions, CellSize / 2.0f, AllGridsMapRef);//Divide the grids into smaller grids.
+        DivideGridsIntoSmallerGrids(HitGridPositions, CellSize / 2.0f, AllGridsMapRef);
     }
 }
 
-// Divide the grids into smaller grids
 void AHVolume3D::DivideGridsIntoSmallerGrids(const TArray<FVector>& CellPositionRefs, float SmallerCellSize, TMap<FVector, FS_GridCellsID*> AllGridsMapRef)
 {
-    if (SmallerCellSize <= MinCellSize - 1)//If the cell size is smaller than the minimum cell size.
+    if (SmallerCellSize <= MinCellSize - 1)
     {
         return;
     }
-    TArray<FVector> HitGridPositions;//Array of the hit grid positions.
-    TMap<FVector, FS_GridCellsID*> ChildGridsMap;//Map of the child grids.
+    TArray<FVector> HitGridPositions;
+    TMap<FVector, FS_GridCellsID*> ChildGridsMap;
     
-    for (const FVector& CellPositionRef : CellPositionRefs)//For each cell position.
+    for (const FVector& CellPositionRef : CellPositionRefs)
     {
-        FS_GridCellsID* ParentGrid = nullptr;//Parent grid.
-        FS_GridCellsID* grid = *AllGridsMapRef.Find(CellPositionRef);//Get the grid from the map.
+        FS_GridCellsID* ParentGrid = nullptr;
+        FS_GridCellsID* grid = *AllGridsMapRef.Find(CellPositionRef);
         if(grid)
         {
-            ParentGrid = grid;//Set the parent grid.
+            ParentGrid = grid;
         }
-        if (!ParentGrid)//If the parent grid is not valid continue.
+        if (!ParentGrid)
         {
             continue;
         }
 
-        for (int32 X = -1; X <= 1; X += 2)//For each X.
+        for (int32 X = -1; X <= 1; X += 2)
         {
-            for (int32 Y = -1; Y <= 1; Y += 2)//For each Y.
+            for (int32 Y = -1; Y <= 1; Y += 2)
             {
-                for (int32 Z = -1; Z <= 1; Z += 2)//For each Z. 
+                for (int32 Z = -1; Z <= 1; Z += 2)
                 {
                     FVector SmallerCellPosition = CellPositionRef + FVector(
                         X * (SmallerCellSize / 2),
                         Y * (SmallerCellSize / 2),
-                        Z * (SmallerCellSize / 2));//Calculate the smaller cell position.
+                        Z * (SmallerCellSize / 2));
 
                     FHitResult HitResult;
                     FCollisionQueryParams Params;
@@ -227,7 +214,7 @@ void AHVolume3D::DivideGridsIntoSmallerGrids(const TArray<FVector>& CellPosition
                         FCollisionShape::MakeBox(FVector(SmallerCellSize / 2)),
                         Params);
 
-                    FS_GridCellsID* NewChildGrid = new FS_GridCellsID();//Create a new child grid.
+                    FS_GridCellsID* NewChildGrid = new FS_GridCellsID();
                     NewChildGrid->GridPersonalID = ++GridIDCounter;
                     NewChildGrid->GridPosition = SmallerCellPosition;
                     NewChildGrid->GridSize = SmallerCellSize;
@@ -239,110 +226,108 @@ void AHVolume3D::DivideGridsIntoSmallerGrids(const TArray<FVector>& CellPosition
                     
                     if (bHit)
                     {
-                        HitGridPositions.Add(SmallerCellPosition);//Add the hit grid position to the hit grid positions for dividing into smaller grids again.
+                        HitGridPositions.Add(SmallerCellPosition);
                     }
                     else
                     {
-                        AllGridsMap.Add(SmallerCellPosition, NewChildGrid);//Add the grid to the map if it is free that means it is not hit by anything.
+                        AllGridsMap.Add(SmallerCellPosition, NewChildGrid);
                     }
                 }
             }
         }
     }
 
-    if (HitGridPositions.Num() > 0)//If there are hit grid positions.
+    if (HitGridPositions.Num() > 0)
     {
-        DivideGridsIntoSmallerGrids(HitGridPositions, SmallerCellSize / 2.0f, ChildGridsMap);//Divide the grids into smaller grids again.
+        DivideGridsIntoSmallerGrids(HitGridPositions, SmallerCellSize / 2.0f, ChildGridsMap);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// Start updating the grids
 void AHVolume3D::StartUpdateGrids()
 {
-    if(!GetWorld()->GetTimerManager().IsTimerActive(UpdateGridTimerHandle))//If the timer is not active.
+    if(!GetWorld()->GetTimerManager().IsTimerActive(UpdateGridTimerHandle))
     {
-        GetWorld()->GetTimerManager().SetTimer(UpdateGridTimerHandle, this, &AHVolume3D::UpdateGrids, 1/3.f, true);//Start the timer for updating the grids.
+        GetWorld()->GetTimerManager().SetTimer(UpdateGridTimerHandle, this, &AHVolume3D::UpdateGrids, 1/3.f, true);
     }
 }
 
 void AHVolume3D::UpdateGrids()
 {
-    if (DynamicObjects.Num() == 0)//If there are no dynamic objects.
+    if (DynamicObjects.Num() == 0)
     {
-        CellsPosition.Empty();//Empty the cells position.
-        UpdateCellsPosition.Empty();//Empty the update cells position.
-        GetWorld()->GetTimerManager().ClearTimer(UpdateGridTimerHandle);//Clear the timer.
+        CellsPosition.Empty();
+        UpdateCellsPosition.Empty();
+        GetWorld()->GetTimerManager().ClearTimer(UpdateGridTimerHandle);
     }
     
-    if (!bCanUpdateGrids)//If the grids cannot be updated.
+    if (!bCanUpdateGrids)
     {
         return;
     }
-    CellsPosition.Empty();//Empty the cells position.
+    CellsPosition.Empty();
     Async(EAsyncExecution::ThreadPool,[this]()
     {
-        bCanUpdateGrids = false;//Set the grids can be updated to false.
-        TArray<FVector> CellPositionsRef;//Array of the cell positions reference.
-        for (AActor* DynamicObject : DynamicObjects)//For each dynamic object.
+        bCanUpdateGrids = false;
+        TArray<FVector> CellPositionsRef;
+        for (AActor* DynamicObject : DynamicObjects)
         {
-            FVector ObjectLocation = DynamicObject->GetActorLocation();//Get the location of the dynamic object.
-            FVector* LastPosition = DynamicObjectsLastPosition.Find(DynamicObject);//Get the last position of the dynamic object.
+            FVector ObjectLocation = DynamicObject->GetActorLocation();
+            FVector* LastPosition = DynamicObjectsLastPosition.Find(DynamicObject);
         
-            if (LastPosition && *LastPosition != ObjectLocation)//If the last position is valid and the last position is not equal to the object location.
+            if (LastPosition && *LastPosition != ObjectLocation)
             {
                 FVector ObjectExtent;
-                DynamicObject->GetActorBounds(true, ObjectLocation, ObjectExtent);//Get the extent of the dynamic object.
+                DynamicObject->GetActorBounds(true, ObjectLocation, ObjectExtent);
 
-                int32 ObjectGridLeftX = FMath::FloorToInt((ObjectLocation.X - ObjectExtent.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//Calculate the left X.
-                int32 ObjectGridRightX = FMath::FloorToInt((ObjectLocation.X + ObjectExtent.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//Calculate the right X.
+                int32 ObjectGridLeftX = FMath::FloorToInt((ObjectLocation.X - ObjectExtent.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//left X
+                int32 ObjectGridRightX = FMath::FloorToInt((ObjectLocation.X + ObjectExtent.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//right X
 
-                int32 ObjectGridDownY = FMath::FloorToInt((ObjectLocation.Y - ObjectExtent.Y - OriginOfVolume.Y + BoxExtent.Y) / CellSize);//Calculate the down Y.
-                int32 ObjectGridUpY = FMath::FloorToInt((ObjectLocation.Y + ObjectExtent.Y - OriginOfVolume.Y + BoxExtent.Y) / CellSize);//Calculate the up Y.
+                int32 ObjectGridDownY = FMath::FloorToInt((ObjectLocation.Y - ObjectExtent.Y - OriginOfVolume.Y + BoxExtent.Y) / CellSize);//down Y
+                int32 ObjectGridUpY = FMath::FloorToInt((ObjectLocation.Y + ObjectExtent.Y - OriginOfVolume.Y + BoxExtent.Y) / CellSize);//up Y
 
-                int32 ObjectGridBackZ = FMath::FloorToInt((ObjectLocation.Z - ObjectExtent.Z - OriginOfVolume.Z + BoxExtent.Z) / CellSize);//Calculate the back Z.
-                int32 ObjectGridFrontZ = FMath::FloorToInt((ObjectLocation.Z + ObjectExtent.Z - OriginOfVolume.Z + BoxExtent.Z) / CellSize);//Calculate the front Z.
+                int32 ObjectGridBackZ = FMath::FloorToInt((ObjectLocation.Z - ObjectExtent.Z - OriginOfVolume.Z + BoxExtent.Z) / CellSize);//back Z
+                int32 ObjectGridFrontZ = FMath::FloorToInt((ObjectLocation.Z + ObjectExtent.Z - OriginOfVolume.Z + BoxExtent.Z) / CellSize);//front Z
 
-                for (int32 X = FMath::Max(0, ObjectGridLeftX); X <= FMath::Min(CellsAtX - 1, ObjectGridRightX); X++)//For each X.
+                for (int32 X = FMath::Max(0, ObjectGridLeftX); X <= FMath::Min(CellsAtX - 1, ObjectGridRightX); X++)
                 {
-                    for (int32 Y = FMath::Max(0, ObjectGridDownY); Y <= FMath::Min(CellsAtY - 1, ObjectGridUpY); Y++)//For each Y.
+                    for (int32 Y = FMath::Max(0, ObjectGridDownY); Y <= FMath::Min(CellsAtY - 1, ObjectGridUpY); Y++)
                     {
-                        for (int32 Z = FMath::Max(0, ObjectGridBackZ); Z <= FMath::Min(CellsAtZ - 1, ObjectGridFrontZ); Z++)//For each Z.
+                        for (int32 Z = FMath::Max(0, ObjectGridBackZ); Z <= FMath::Min(CellsAtZ - 1, ObjectGridFrontZ); Z++)
                         {
                             FVector CellPosition = OriginOfVolume + FVector(
                                 (X * CellSize) - BoxExtent.X + CellSize / 2,
                                 (Y * CellSize) - BoxExtent.Y + CellSize / 2,
                                 (Z * CellSize) - BoxExtent.Z + CellSize / 2);
-                            CellPositionsRef.Add(CellPosition);//Add the cell position to the cell positions reference for testing the grids.
+                            CellPositionsRef.Add(CellPosition);
                         }
                     }
                 }
-                *LastPosition = ObjectLocation; // Update the last position of the dynamic object.
+                *LastPosition = ObjectLocation;
             }
         }
         AsyncTask(ENamedThreads::GameThread, [this,CellPositionsRef]()
         {
-            if(CellPositionsRef.Num() > 0)//If there are cell positions reference.
+            if(CellPositionsRef.Num() > 0)
             {
-                TestGrids(CellPositionsRef);//Test the grids.
+                TestGrids(CellPositionsRef);
             }
             else
             {
-                bCanUpdateGrids = true;//Set the grids can be updated to true.
+                bCanUpdateGrids = true;
             }
         });
     });
 }
 
-// Test the grids
 void AHVolume3D::TestGrids(TArray<FVector> gridsPositions)
 {
     UWorld* WorldRef = GetWorld();
     Async(EAsyncExecution::ThreadPool, [this,gridsPositions, WorldRef]()
     {
-        TArray<FVector> CellsPositionLocal;//Array of the cells position.
-        for(FVector gridPosition : gridsPositions)//For each grid position.
+        TArray<FVector> CellsPositionLocal;
+        for(FVector gridPosition : gridsPositions)
         {
             FHitResult HitResult;
             FCollisionQueryParams Params;
@@ -359,80 +344,78 @@ void AHVolume3D::TestGrids(TArray<FVector> gridsPositions)
                 );
             if(bHit)
             {
-                CellsPosition.Add(gridPosition);//Add the grid position to the cells position for updating the grids.
+                CellsPosition.Add(gridPosition);
             }
         }
-        CellsPositionLocal = CellsPosition;//Set the cells position local to the cells position.
+        CellsPositionLocal = CellsPosition;
         AsyncTask(ENamedThreads::GameThread, [this,CellsPositionLocal]()
         {
-            UpdateGridsStatus(CellsPositionLocal);//Update the status of the grids.
+            UpdateGridsStatus(CellsPositionLocal);
         });
     });
 }
 
-// Update the status of the grids
 void AHVolume3D::UpdateGridsStatus(TArray<FVector> cellsPositions)
 {
-    for (int32 i = UpdateCellsPosition.Num() - 1; i >= 0; --i)//For each update cell position member.
+    for (int32 i = UpdateCellsPosition.Num() - 1; i >= 0; --i)
     {
-        const FVector& updateCell = UpdateCellsPosition[i];//Get the update cell.
-        if (!cellsPositions.Contains(updateCell))//If the cells positions do not contain the update cell.
+        const FVector& updateCell = UpdateCellsPosition[i];
+        if (!cellsPositions.Contains(updateCell))
         {
-            FS_GridCellsID** gridPtr = AllGridsMap.Find(updateCell);//Find the grid.
-            if (gridPtr && *gridPtr)//If the grid is valid.
+            FS_GridCellsID** gridPtr = AllGridsMap.Find(updateCell);
+            if (gridPtr && *gridPtr)
             {
-                UpdateCellsPosition.RemoveAt(i); // Remove the update cell from the update cells position.
-                (*gridPtr)->IsFree = true; // Set the grid is free.
+                UpdateCellsPosition.RemoveAt(i);
+                (*gridPtr)->IsFree = true;
             }
         }
     }
-    for (const FVector& cellPosition : cellsPositions)//For each cell position.
+    for (const FVector& cellPosition : cellsPositions)
     {
-        FS_GridCellsID** gridPtr = AllGridsMap.Find(cellPosition);//Find the grid.
-        if (gridPtr && *gridPtr) // If the grid is valid.
+        FS_GridCellsID** gridPtr = AllGridsMap.Find(cellPosition);
+        if (gridPtr && *gridPtr)
         {
-            if (!UpdateCellsPosition.Contains(cellPosition))//If the update cells position do not contain the cell position.
+            if (!UpdateCellsPosition.Contains(cellPosition))
             {
-                UpdateCellsPosition.Add(cellPosition);//Add the cell position to the update cells position.
+                UpdateCellsPosition.Add(cellPosition);
             }
-            if((*gridPtr)->IsFree)//If the grid is free.
+            if((*gridPtr)->IsFree)
             {
-                (*gridPtr)->IsFree = false; // Set the grid is not free.
+                (*gridPtr)->IsFree = false;
             }
         }
     }
-    OnGridsUpdated.Broadcast(); // Broadcast the OnGridsUpdated delegate.
-    bCanUpdateGrids = true;//Set the grids can be updated to true.
+    OnGridsUpdated.Broadcast();
+    bCanUpdateGrids = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// Find the path between two points
+
 void AHVolume3D::FindPath(UObject* CallingObject, const FName& FunctionName, FVector Start, FVector End, bool bIsWalking, float CharacterRadius, float CharacterHalfHeight, AActor* OwnerRef)
 {
     FS_PathRequest PathRequest;
     PathRequest.Start = Start;
     PathRequest.End = End;
     PathRequest.VolumeRef = this;
-    PathRequest.OnPathFound.BindUFunction(CallingObject, FunctionName);//Bind the function to the OnPathFound delegate.
+    PathRequest.OnPathFound.BindUFunction(CallingObject, FunctionName);//bind the function to the OnPathFound delegate
     PathRequest.CharacterRadius = CharacterRadius;
     PathRequest.CharacterHalfHeight = CharacterHalfHeight;
     PathRequest.bIsWalking = bIsWalking;
     PathRequest.Owner = OwnerRef;
     
-    PathCore->AssignRequest(PathRequest);//Assign the pathfinding request.
+    PathCore->AssignRequest(PathRequest);
 }
 
-// Get the grid ID from the position
 int32 AHVolume3D::GetGridIDFromPosition(const FVector& Position) const
 {
-    int32 XIndex = FMath::FloorToInt((Position.X - OriginOfVolume.X + BoxExtent.X) / CellSize);//Calculate the X index.
-    int32 YIndex = FMath::FloorToInt((Position.Y - OriginOfVolume.Y + BoxExtent.Y) / CellSize);//Calculate the Y index.
-    int32 ZIndex = FMath::FloorToInt((Position.Z - OriginOfVolume.Z + BoxExtent.Z) / CellSize);//Calculate the Z index.
+    int32 XIndex = FMath::FloorToInt((Position.X - OriginOfVolume.X + BoxExtent.X) / CellSize);
+    int32 YIndex = FMath::FloorToInt((Position.Y - OriginOfVolume.Y + BoxExtent.Y) / CellSize);
+    int32 ZIndex = FMath::FloorToInt((Position.Z - OriginOfVolume.Z + BoxExtent.Z) / CellSize);
     
     if (XIndex < 0 || XIndex >= CellsAtX ||
         YIndex < 0 || YIndex >= CellsAtY ||
-        ZIndex < 0 || ZIndex >= CellsAtZ)//If the indexes are out of bounds.
+        ZIndex < 0 || ZIndex >= CellsAtZ)
     {
         return -1;
     }
@@ -440,28 +423,28 @@ int32 AHVolume3D::GetGridIDFromPosition(const FVector& Position) const
     FVector CellLeftBottomCorner = OriginOfVolume + FVector(
         (XIndex * CellSize) - BoxExtent.X,
         (YIndex * CellSize) - BoxExtent.Y,
-        (ZIndex * CellSize) - BoxExtent.Z); // Calculate the left bottom corner of the cell
+        (ZIndex * CellSize) - BoxExtent.Z);
     
-    FVector CellRightTopCorner = CellLeftBottomCorner + FVector(CellSize, CellSize, CellSize); // Calculate the right top corner of the cell
+    FVector CellRightTopCorner = CellLeftBottomCorner + FVector(CellSize, CellSize, CellSize); 
     
     if (Position.X >= CellLeftBottomCorner.X && Position.X <= CellRightTopCorner.X &&
         Position.Y >= CellLeftBottomCorner.Y && Position.Y <= CellRightTopCorner.Y &&
-        Position.Z >= CellLeftBottomCorner.Z && Position.Z <= CellRightTopCorner.Z) // Check if the position is inside the cell
+        Position.Z >= CellLeftBottomCorner.Z && Position.Z <= CellRightTopCorner.Z)
     {
         FVector CellPosition = OriginOfVolume + FVector(
             (XIndex * CellSize) - BoxExtent.X + CellSize / 2,
             (YIndex * CellSize) - BoxExtent.Y + CellSize / 2,
             (ZIndex * CellSize) - BoxExtent.Z + CellSize / 2);
 
-        const FS_GridCellsID* const* GridPtr = AllGridsMap.Find(CellPosition);//Find the grid.
+        const FS_GridCellsID* const* GridPtr = AllGridsMap.Find(CellPosition);
         
-        if (!GridPtr || !(*GridPtr))//If the grid is not valid.
+        if (!GridPtr || !(*GridPtr))
         {
             return -1;
         }
 
-        const FS_GridCellsID* Grid = *GridPtr;//Get the grid.
-        return Grid->GridPersonalID;//Return the grid personal ID.
+        const FS_GridCellsID* Grid = *GridPtr;
+        return Grid->GridPersonalID;
     }
 
     return -1;

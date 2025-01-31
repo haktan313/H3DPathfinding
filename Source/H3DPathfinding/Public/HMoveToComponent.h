@@ -1,5 +1,3 @@
-//UHMoveToComponent.h
-//It is a component that moves the actor to the target location.
 
 #pragma once
 
@@ -17,45 +15,48 @@ class H3DPATHFINDING_API UHMoveToComponent : public UActorComponent
 
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MoveToComponent")
-	FVector TargetLocation;//Target location of the actor.
+	FVector TargetLocation;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite ,Category = "MoveToComponent")
-	bool bDrawDebugLine = true;//If the debug line should be drawn or not.
+	bool bDrawDebugLine = true;//debug line
 	UPROPERTY(EditAnywhere,BlueprintReadWrite ,Category = "MoveToComponent")
-	float DebugLineDuration = -1.0f;//Duration of the debug line. -1 means infinite duration.
+	float DebugLineDuration = -1.0f;//duration of the debug line. -1 means infinite duration
 private:	
-	TArray<FVector> PathPoints;//Array of the points in the path.
+	TArray<FVector> PathPoints;//array of the path points
 	
-	int32 CurrentPathIndex = 0;//Index of the current point in the path.
+	int32 CurrentPathIndex = 0;
+
+	UPROPERTY()
+	class AActor* Actor;
+	UPROPERTY()
+	class ACharacter* CharacterRef;
+	UPROPERTY()
+	class AHVolume3D* Volume;
 	
-	class AActor* Actor;//Reference to the actor.
-	class ACharacter* CharacterRef;//Reference to the character.
-	class AHVolume3D* Volume;//Reference to the volume.
-	
-	bool bIsWalking = true;//If the actor is walking or flying.
-	float Tolerance = 100.0f;//Tolerance value for the distance between the actor and next point in the path.
+	bool bIsWalking = true;
+	float Tolerance = 100.0f;
 	
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "MoveToComponent")
-	void HMoveTo(AActor* ActorRef, AHVolume3D* VolumeRef, float ToleranceRef);//Starts the pathfinding process.
+	void HMoveTo(AActor* ActorRef, AHVolume3D* VolumeRef, float ToleranceRef);
 	
 
 private:
-	bool bCanFindPath = true;//If the path can be found or not.
+	bool bCanFindPath = true;
 	FTimerHandle CooldownForFindPathTimerHandle;
-	void CooldownForFindPath();//Cooldown for finding the path.
+	void CooldownForFindPath();
 	
 	UFUNCTION()
-	void OnPathFound(const FS_PathResult& Result);//When path is found, this function is called by OnPathFound delegate.
+	void OnPathFound(const FS_PathResult& Result);
 	UFUNCTION()
-	void CheckAvailability();//Check if the path is available or not when dinamic obstacles are moving. Called by OnGridsUpdated delegate.
+	void CheckAvailability();//check if the path is available or not when dinamic obstacles are moving
 
-	bool bCanCheckAvailability = true;//If the availability of the path can be checked or not.
-	bool bIsCheckAvailabiliyCalled = false;//If the CheckAvailability function is called or not.
+	bool bCanCheckAvailability = true;//availability of the path can be checked or not
+	bool bIsCheckAvailabiliyCalled = false;//CheckAvailability function is called or not.
 	FTimerHandle CooldownForCheckAvailabilityTimerHandle;
-	void CooldownForCheckAvailability();//Cooldown for checking the availability of the path.
+	void CooldownForCheckAvailability();
 
 	FTimerHandle MoveToTimerHandle;
-	void MoveToTick();//Move the actor to the target location.
+	void MoveToTick();
 		
 };

@@ -1,5 +1,4 @@
-// HDynamicObjects.h
-//It is a component that detects the overlap of the actor with the volume and updates the grids.
+
 
 #pragma once
 

@@ -12,6 +12,7 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 // Cross Module References
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 	H3DPATHFINDING_API UClass* Z_Construct_UClass_AHVolume3D_NoRegister();
 	H3DPATHFINDING_API UClass* Z_Construct_UClass_UHMoveToComponent();
@@ -63,9 +64,7 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UHMoveToComponent_CheckAvailability_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "//When path is found, this function is called by OnPathFound delegate.\n" },
 		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
-		{ "ToolTip", "When path is found, this function is called by OnPathFound delegate." },
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHMoveToComponent_CheckAvailability_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHMoveToComponent, nullptr, "CheckAvailability", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00040401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UHMoveToComponent_CheckAvailability_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UHMoveToComponent_CheckAvailability_Statics::Function_MetaDataParams)) };
@@ -140,15 +139,13 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(HMoveToComponent_eventOnPathFound_Parms, Result), Z_Construct_UScriptStruct_FS_PathResult, METADATA_PARAMS(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result_MetaData)) }; // 2741538086
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(HMoveToComponent_eventOnPathFound_Parms, Result), Z_Construct_UScriptStruct_FS_PathResult, METADATA_PARAMS(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result_MetaData)) }; // 596520602
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::NewProp_Result,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "//Cooldown for finding the path.\n" },
 		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
-		{ "ToolTip", "Cooldown for finding the path." },
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHMoveToComponent, nullptr, "OnPathFound", nullptr, nullptr, sizeof(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::HMoveToComponent_eventOnPathFound_Parms), Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00440401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UHMoveToComponent_OnPathFound_Statics::Function_MetaDataParams)) };
@@ -186,6 +183,18 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DebugLineDuration_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_DebugLineDuration;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Actor_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Actor;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CharacterRef_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CharacterRef;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Volume_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Volume;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -195,9 +204,9 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_H3DPathfinding,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UHMoveToComponent_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UHMoveToComponent_CheckAvailability, "CheckAvailability" }, // 2896829644
+		{ &Z_Construct_UFunction_UHMoveToComponent_CheckAvailability, "CheckAvailability" }, // 3963812761
 		{ &Z_Construct_UFunction_UHMoveToComponent_HMoveTo, "HMoveTo" }, // 3962344674
-		{ &Z_Construct_UFunction_UHMoveToComponent_OnPathFound, "OnPathFound" }, // 528575646
+		{ &Z_Construct_UFunction_UHMoveToComponent_OnPathFound, "OnPathFound" }, // 3863405645
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UHMoveToComponent_Statics::Class_MetaDataParams[] = {
@@ -217,9 +226,7 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_bDrawDebugLine_MetaData[] = {
 		{ "Category", "MoveToComponent" },
-		{ "Comment", "//Target location of the actor.\n" },
 		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
-		{ "ToolTip", "Target location of the actor." },
 	};
 #endif
 	void Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_bDrawDebugLine_SetBit(void* Obj)
@@ -230,16 +237,37 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_DebugLineDuration_MetaData[] = {
 		{ "Category", "MoveToComponent" },
-		{ "Comment", "//If the debug line should be drawn or not.\n" },
+		{ "Comment", "//debug line\n" },
 		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
-		{ "ToolTip", "If the debug line should be drawn or not." },
+		{ "ToolTip", "debug line" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_DebugLineDuration = { "DebugLineDuration", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UHMoveToComponent, DebugLineDuration), METADATA_PARAMS(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_DebugLineDuration_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_DebugLineDuration_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Actor_MetaData[] = {
+		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Actor = { "Actor", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UHMoveToComponent, Actor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Actor_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Actor_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_CharacterRef_MetaData[] = {
+		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_CharacterRef = { "CharacterRef", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UHMoveToComponent, CharacterRef), Z_Construct_UClass_ACharacter_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_CharacterRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_CharacterRef_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Volume_MetaData[] = {
+		{ "ModuleRelativePath", "Public/HMoveToComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Volume = { "Volume", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UHMoveToComponent, Volume), Z_Construct_UClass_AHVolume3D_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Volume_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Volume_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UHMoveToComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_TargetLocation,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_bDrawDebugLine,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_DebugLineDuration,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Actor,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_CharacterRef,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UHMoveToComponent_Statics::NewProp_Volume,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UHMoveToComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UHMoveToComponent>::IsAbstract,
@@ -274,15 +302,15 @@ void EmptyLinkFunctionForGeneratedCodeHMoveToComponent() {}
 	UHMoveToComponent::UHMoveToComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UHMoveToComponent);
 	UHMoveToComponent::~UHMoveToComponent() {}
-	struct Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UHMoveToComponent, UHMoveToComponent::StaticClass, TEXT("UHMoveToComponent"), &Z_Registration_Info_UClass_UHMoveToComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHMoveToComponent), 710324125U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_UHMoveToComponent, UHMoveToComponent::StaticClass, TEXT("UHMoveToComponent"), &Z_Registration_Info_UClass_UHMoveToComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHMoveToComponent), 4167674655U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_1035762376(TEXT("/Script/H3DPathfinding"),
-		Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Documents_Unreal_Projects_MyProject_Build_BuiltPlugins_H3DPathfinding_5_2_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_1023196914(TEXT("/Script/H3DPathfinding"),
+		Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_HMoveToComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -1,4 +1,4 @@
-//StructuresEnums_H3DPathFinding.h
+
 
 #pragma once
 
@@ -6,20 +6,20 @@
 #include "StructuresEnums_H3DPathFinding.generated.h"
 
 
-DECLARE_DELEGATE_OneParam(PathResultDelegate, const FS_PathResult&);//Delegate for when the path is found.
+DECLARE_DELEGATE_OneParam(PathResultDelegate, const FS_PathResult&);//delegate for when the path is found
 
 
-struct FAStarNode//Node for A* algorithm.
+struct FAStarNode//Node for A* algorithm
 {
-    int32 GridID; //Unique ID for the grid.
-    FVector WorldLocation;  //World location of the grid.
-    float GCost = 0.0f;  //Cost from the start node to the current node.
-    float HCost = 0.0f;  //Cost from the current node to the end node.
-    float FCost() const { return GCost + HCost; } //Total cost of the node.
-    FAStarNode* Parent = nullptr; //Parent node of the current node.
+    int32 GridID;
+    FVector WorldLocation;
+    float GCost = 0.0f; //cost start node to the current node
+    float HCost = 0.0f; //cost current node to the end node
+    float FCost() const { return GCost + HCost; } //total cost
+    FAStarNode* Parent = nullptr;
 
 
-    bool operator==(const FAStarNode& Other) const //Operator for checking if two nodes are equal.
+    bool operator==(const FAStarNode& Other) const //Operator for two nodes equal or not
     {
         return GridID == Other.GridID;
     }
@@ -30,16 +30,16 @@ FORCEINLINE uint32 GetTypeHash(const FAStarNode& Node)
     return GetTypeHash(Node.GridID);
 }
 
-struct FNodeComparator //FindPath function uses a priority queue to sort the nodes with the lowest FCost value at the top of the queue.
+struct FNodeComparator //queue to sort the nodes lowest FCost value to top
 {
     bool operator()(const FAStarNode* A, const FAStarNode* B) const
     {
-        return A->FCost() > B->FCost();//FCost is coming from the FAStarNode struct.
+        return A->FCost() > B->FCost();
     }
 };
 
 USTRUCT(BlueprintType)
-struct FS_GridCellsID//Structure for the grid cells.
+struct FS_GridCellsID
 {
     GENERATED_BODY()
 
@@ -47,30 +47,30 @@ struct FS_GridCellsID//Structure for the grid cells.
         : GridPersonalID(0), GridPosition(FVector::ZeroVector), GridSize(0.0f), IsFree(true), IsDivided(false), ParentGridID(-1), ChildGridIDs() {}
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    int32 GridPersonalID; //Unique ID for the grid.
+    int32 GridPersonalID;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    FVector GridPosition; //World position of the grid.
+    FVector GridPosition;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    float GridSize; //Size of the grid.
+    float GridSize;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    bool IsFree; //If the grid is free or not.
+    bool IsFree;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    bool IsDivided; //If the grid is divided into smaller grids or not.
+    bool IsDivided;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    int32 ParentGridID; //Parent grid ID.
+    int32 ParentGridID;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GridCellsID")
-    TArray<int32> ChildGridIDs; //Child grid IDs.
+    TArray<int32> ChildGridIDs;
 };
 
 
 USTRUCT(BlueprintType)
-struct FS_PathResult //Structure for the path result.
+struct FS_PathResult
 {
     GENERATED_BODY()
 
@@ -78,12 +78,12 @@ struct FS_PathResult //Structure for the path result.
 
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathResult")
-    TArray<FVector> PathPoints; //Array of the points in the path.
+    TArray<FVector> PathPoints;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathResult")
-    bool bSuccess;  //If the path is found or not.
+    bool bSuccess;
 
-    bool operator==(const FS_PathResult& Other) const //Operator for checking if two path results are equal.
+    bool operator==(const FS_PathResult& Other) const //operator for checking if two path results are equal
     {
         return this == &Other;
     }
@@ -96,7 +96,7 @@ FORCEINLINE uint32 GetTypeHash(const FS_PathResult& PathResult)
 
 
 USTRUCT(BlueprintType)
-struct FS_PathRequest //Structure for the path request.
+struct FS_PathRequest
 {
     GENERATED_BODY()
 
@@ -104,25 +104,25 @@ struct FS_PathRequest //Structure for the path request.
         : Start(FVector::ZeroVector), End(FVector::ZeroVector), VolumeRef(nullptr), CharacterRadius(0.0f), CharacterHalfHeight(0.0f), bIsWalking(false), Owner(nullptr) {}
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    FVector Start; //Start location of the path.
+    FVector Start;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    FVector End; //End location of the path.
+    FVector End;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    class AHVolume3D* VolumeRef; //Reference to the volume.
+    class AHVolume3D* VolumeRef;
 
-    PathResultDelegate OnPathFound; //Delegate for when the path is found.
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    float CharacterRadius; //Radius of the character.
+    PathResultDelegate OnPathFound; //Delegate for when the path is found
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    float CharacterHalfHeight; //Half height of the character.
+    float CharacterRadius;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    bool bIsWalking; //If the character is walking or flying.
+    float CharacterHalfHeight;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
-    AActor* Owner; //Owner of the path request.
+    bool bIsWalking;//if the character is walking or flying
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PathRequest")
+    AActor* Owner;//owner of the path request
 };
