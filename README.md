@@ -4,7 +4,7 @@
 **Unreal Engine 5.5: [https://www.mediafire.com/file/rfigf7uvqrrlpz9/H3DPathAIPro_5.5.zip/file](https://www.mediafire.com/file/8ke1kr70nm5klp6/H3DPathAIPro_5.5.zip/file)**
 
 ## Tutorial Video
-[H3DPathAIPro Tutorial](https://youtu.be/Xdd8zPXJ8Gw)
+[H3DPathAIPro Tutorial](https://youtu.be/wuCLwcgQxt4)
 
 ## H3DPathAIPro Showcase Video
 [H3DPathAIPro Showcase](https://youtu.be/w4L8tLv-wZw)
