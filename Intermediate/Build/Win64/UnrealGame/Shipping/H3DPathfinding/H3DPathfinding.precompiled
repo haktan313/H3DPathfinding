@@ -1,0 +1,10 @@
+{
+	"OutputFiles": [
+		"..\\..\\..\\x64\\UnrealGame\\Shipping\\H3DPathfinding\\Module.H3DPathfinding.cpp.obj",
+		"..\\..\\..\\x64\\UnrealGame\\Shipping\\H3DPathfinding\\H3DMoveToAsyncAction.cpp.obj",
+		"..\\..\\..\\x64\\UnrealGame\\Shipping\\H3DPathfinding\\H3DPathCore.cpp.obj",
+		"..\\..\\..\\x64\\UnrealGame\\Shipping\\H3DPathfinding\\H3DPathfinding.cpp.obj",
+		"..\\..\\..\\x64\\UnrealGame\\Shipping\\H3DPathfinding\\H3DVolume.cpp.obj",
+		"..\\..\\..\\x64\\UnrealGame\\Shipping\\H3DPathfinding\\HDynamicObject.cpp.obj"
+	]
+}

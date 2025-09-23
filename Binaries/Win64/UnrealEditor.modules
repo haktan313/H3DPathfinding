@@ -1,7 +1,7 @@
 {
-	"BuildId": "37670630",
+	"BuildId": "43139311",
 	"Modules": 
 	{
-		"H3DPathAIPro": "UnrealEditor-H3DPathAIPro.dll"
+		"H3DPathfinding": "UnrealEditor-H3DPathfinding.dll"
 	}
 }
