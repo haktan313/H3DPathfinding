@@ -16,10 +16,14 @@ UE5 async A* pathfinding on a 3D grid. Handles dynamic obstacles (live occupancy
 ***1.Add the Volume***<img width="111" height="25" alt="Screenshot 2025-09-25 002713" src="https://github.com/user-attachments/assets/205b65b5-cee3-4360-87dc-3239ea284580" />
 - **Place an H3DVolume actor in your level**
 - **Set Cell Size, Collision Channel, and other grid settings in the Details panel**<img width="808" height="541" alt="Screenshot 2025-09-25 002703" src="https://github.com/user-attachments/assets/2ea739bb-210a-436d-8564-9722e7c420f9" />
+
 - **Click Divide Volume Into Grids to generate the 3D grid**
-- ** Physic Tests Tolerance**: Adds a safety tolerance to collision checks during pathfinding to prevent cells from being unnecessarily marked as blocked, resulting in smoother movement.
-- ** Cell Size Multiplier for Adjustment**: How many extra cell sizes the pathfinder will search if the start or end cell is not usable (default 2).
-- ** Update Grids Rate**: How often (seconds) dynamic-object occupancy is refreshed (default 0.2 s).
+  
+- **Physic Tests Tolerance**: Adds a safety tolerance to collision checks during pathfinding to prevent cells from being unnecessarily marked as blocked, resulting in smoother movement.
+  
+- **Cell Size Multiplier for Adjustment**: How many extra cell sizes the pathfinder will search if the start or end cell is not usable (default 2).
+  
+- **Update Grids Rate**: How often (seconds) dynamic-object occupancy is refreshed (default 0.2 s).
   
 ***2.Mark Dynamic Obstacles (optional)***<img width="223" height="32" alt="Screenshot 2025-09-25 002634" src="https://github.com/user-attachments/assets/a6e5f25a-8f19-4416-aba2-d12b1d149fbc" />
 - **Attach the UHDynamicObject component to any actor that should block or update the grid at runtime. The volume will automatically track movement and sets free or not free.**
