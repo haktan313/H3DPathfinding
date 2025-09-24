@@ -3,7 +3,7 @@
 	"Version": 1,
 	"VersionName": "1.0",
 	"FriendlyName": "H3DPathfinding",
-	"Description": "",
+	"Description": "UE5 async A* pathfinding on a 3D grid. Handles dynamic obstacles (live occupancy + prediction), start and end relocation, path smoothing, detailed debugging tools, and automatic repathing.",
 	"Category": "Pathfinding",
 	"CreatedBy": "Haktan Cagri Kodat",
 	"CreatedByURL": "https://www.linkedin.com/in/haktan-%C3%A7a%C4%9Fr%C4%B1-kodat-3b01b7297/",

@@ -78,6 +78,6 @@ private:
 	
 	float Tolerance;
 	float DebugLineTime;
-	float newPathStartPointPredictionTime = 0.5f;
+	float NewPathStartPointPredictionTime = 0.5f;
 
 };

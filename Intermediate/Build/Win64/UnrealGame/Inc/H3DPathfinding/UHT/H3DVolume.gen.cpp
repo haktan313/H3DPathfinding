@@ -101,48 +101,6 @@ DEFINE_FUNCTION(AH3DVolume::execGenerateGridID)
 }
 // ********** End Class AH3DVolume Function GenerateGridID *****************************************
 
-// ********** Begin Class AH3DVolume Function GetCellAmountOfTargetActorsBoundsOccupied ************
-struct Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics
-{
-	struct H3DVolume_eventGetCellAmountOfTargetActorsBoundsOccupied_Parms
-	{
-		uint8 ReturnValue;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "Category", "Pathfinding" },
-		{ "ModuleRelativePath", "Public/H3DVolume.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FBytePropertyParams NewProp_ReturnValue;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(H3DVolume_eventGetCellAmountOfTargetActorsBoundsOccupied_Parms, ReturnValue), nullptr, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::NewProp_ReturnValue,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_AH3DVolume, nullptr, "GetCellAmountOfTargetActorsBoundsOccupied", Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::PropPointers), sizeof(Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::H3DVolume_eventGetCellAmountOfTargetActorsBoundsOccupied_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::Function_MetaDataParams), Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::Function_MetaDataParams)},  };
-static_assert(sizeof(Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::H3DVolume_eventGetCellAmountOfTargetActorsBoundsOccupied_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(AH3DVolume::execGetCellAmountOfTargetActorsBoundsOccupied)
-{
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	*(uint8*)Z_Param__Result=P_THIS->GetCellAmountOfTargetActorsBoundsOccupied();
-	P_NATIVE_END;
-}
-// ********** End Class AH3DVolume Function GetCellAmountOfTargetActorsBoundsOccupied **************
-
 // ********** Begin Class AH3DVolume Function GetCellSizeMultiplierForAdjustment *******************
 struct Z_Construct_UFunction_AH3DVolume_GetCellSizeMultiplierForAdjustment_Statics
 {
@@ -319,6 +277,48 @@ DEFINE_FUNCTION(AH3DVolume::execGetGridIDFromPosition)
 }
 // ********** End Class AH3DVolume Function GetGridIDFromPosition **********************************
 
+// ********** Begin Class AH3DVolume Function GetPhysicTestTolerance *******************************
+struct Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics
+{
+	struct H3DVolume_eventGetPhysicTestTolerance_Parms
+	{
+		float ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Pathfinding" },
+		{ "ModuleRelativePath", "Public/H3DVolume.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(H3DVolume_eventGetPhysicTestTolerance_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_AH3DVolume, nullptr, "GetPhysicTestTolerance", Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::PropPointers), sizeof(Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::H3DVolume_eventGetPhysicTestTolerance_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::Function_MetaDataParams), Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::H3DVolume_eventGetPhysicTestTolerance_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AH3DVolume::execGetPhysicTestTolerance)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(float*)Z_Param__Result=P_THIS->GetPhysicTestTolerance();
+	P_NATIVE_END;
+}
+// ********** End Class AH3DVolume Function GetPhysicTestTolerance *********************************
+
 // ********** Begin Class AH3DVolume Function GetUpdateGridsRate ***********************************
 struct Z_Construct_UFunction_AH3DVolume_GetUpdateGridsRate_Statics
 {
@@ -368,11 +368,11 @@ void AH3DVolume::StaticRegisterNativesAH3DVolume()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "DivideVolumeIntoGrids", &AH3DVolume::execDivideVolumeIntoGrids },
 		{ "GenerateGridID", &AH3DVolume::execGenerateGridID },
-		{ "GetCellAmountOfTargetActorsBoundsOccupied", &AH3DVolume::execGetCellAmountOfTargetActorsBoundsOccupied },
 		{ "GetCellSizeMultiplierForAdjustment", &AH3DVolume::execGetCellSizeMultiplierForAdjustment },
 		{ "GetCollisionChannel", &AH3DVolume::execGetCollisionChannel },
 		{ "GetGridCellSize", &AH3DVolume::execGetGridCellSize },
 		{ "GetGridIDFromPosition", &AH3DVolume::execGetGridIDFromPosition },
+		{ "GetPhysicTestTolerance", &AH3DVolume::execGetPhysicTestTolerance },
 		{ "GetUpdateGridsRate", &AH3DVolume::execGetUpdateGridsRate },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -419,6 +419,11 @@ struct Z_Construct_UClass_AH3DVolume_Statics
 		{ "ModuleRelativePath", "Public/H3DVolume.h" },
 		{ "ToolTip", "------------------------------- Grid Settings" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PhysicTestsTolerance_MetaData[] = {
+		{ "Category", "Grid Settings|Volume" },
+		{ "ModuleRelativePath", "Public/H3DVolume.h" },
+		{ "UIMin", "0" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CellSize_MetaData[] = {
 		{ "Category", "Grid Settings|Cells" },
 		{ "ModuleRelativePath", "Public/H3DVolume.h" },
@@ -430,12 +435,6 @@ struct Z_Construct_UClass_AH3DVolume_Statics
 		{ "ModuleRelativePath", "Public/H3DVolume.h" },
 		{ "UIMax", "6" },
 		{ "UIMin", "0" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CellAmountOfTargetActorsBoundsOccupied_MetaData[] = {
-		{ "Category", "Grid Settings|Cells" },
-		{ "ModuleRelativePath", "Public/H3DVolume.h" },
-		{ "UIMax", "256" },
-		{ "UIMin", "1" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CollisionChannel_MetaData[] = {
 		{ "Category", "Grid Settings|Cells" },
@@ -529,9 +528,9 @@ struct Z_Construct_UClass_AH3DVolume_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_VolumeThickness;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_PhysicTestsTolerance;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_CellSize;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_CellSizeMultiplierForAdjustment;
-	static const UECodeGen_Private::FBytePropertyParams NewProp_CellAmountOfTargetActorsBoundsOccupied;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_CollisionChannel;
 	static void NewProp_bDrawDebugFromPlayer_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bDrawDebugFromPlayer;
@@ -577,11 +576,11 @@ struct Z_Construct_UClass_AH3DVolume_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AH3DVolume_DivideVolumeIntoGrids, "DivideVolumeIntoGrids" }, // 2595673948
 		{ &Z_Construct_UFunction_AH3DVolume_GenerateGridID, "GenerateGridID" }, // 4086803352
-		{ &Z_Construct_UFunction_AH3DVolume_GetCellAmountOfTargetActorsBoundsOccupied, "GetCellAmountOfTargetActorsBoundsOccupied" }, // 1449422292
 		{ &Z_Construct_UFunction_AH3DVolume_GetCellSizeMultiplierForAdjustment, "GetCellSizeMultiplierForAdjustment" }, // 1262130272
 		{ &Z_Construct_UFunction_AH3DVolume_GetCollisionChannel, "GetCollisionChannel" }, // 2233715587
 		{ &Z_Construct_UFunction_AH3DVolume_GetGridCellSize, "GetGridCellSize" }, // 3483914687
 		{ &Z_Construct_UFunction_AH3DVolume_GetGridIDFromPosition, "GetGridIDFromPosition" }, // 3856593079
+		{ &Z_Construct_UFunction_AH3DVolume_GetPhysicTestTolerance, "GetPhysicTestTolerance" }, // 128361446
 		{ &Z_Construct_UFunction_AH3DVolume_GetUpdateGridsRate, "GetUpdateGridsRate" }, // 4186288778
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -591,9 +590,9 @@ struct Z_Construct_UClass_AH3DVolume_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_VolumeThickness = { "VolumeThickness", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AH3DVolume, VolumeThickness), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VolumeThickness_MetaData), NewProp_VolumeThickness_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_PhysicTestsTolerance = { "PhysicTestsTolerance", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AH3DVolume, PhysicTestsTolerance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PhysicTestsTolerance_MetaData), NewProp_PhysicTestsTolerance_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_CellSize = { "CellSize", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AH3DVolume, CellSize), nullptr, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CellSize_MetaData), NewProp_CellSize_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_CellSizeMultiplierForAdjustment = { "CellSizeMultiplierForAdjustment", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AH3DVolume, CellSizeMultiplierForAdjustment), nullptr, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CellSizeMultiplierForAdjustment_MetaData), NewProp_CellSizeMultiplierForAdjustment_MetaData) };
-const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_CellAmountOfTargetActorsBoundsOccupied = { "CellAmountOfTargetActorsBoundsOccupied", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AH3DVolume, CellAmountOfTargetActorsBoundsOccupied), nullptr, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CellAmountOfTargetActorsBoundsOccupied_MetaData), NewProp_CellAmountOfTargetActorsBoundsOccupied_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_CollisionChannel = { "CollisionChannel", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AH3DVolume, CollisionChannel), Z_Construct_UEnum_Engine_ECollisionChannel, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CollisionChannel_MetaData), NewProp_CollisionChannel_MetaData) }; // 756624936
 void Z_Construct_UClass_AH3DVolume_Statics::NewProp_bDrawDebugFromPlayer_SetBit(void* Obj)
 {
@@ -648,9 +647,9 @@ void Z_Construct_UClass_AH3DVolume_Statics::NewProp_bDynamicObjectsFound_SetBit(
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AH3DVolume_Statics::NewProp_bDynamicObjectsFound = { "bDynamicObjectsFound", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AH3DVolume), &Z_Construct_UClass_AH3DVolume_Statics::NewProp_bDynamicObjectsFound_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bDynamicObjectsFound_MetaData), NewProp_bDynamicObjectsFound_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AH3DVolume_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_VolumeThickness,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_PhysicTestsTolerance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_CellSize,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_CellSizeMultiplierForAdjustment,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_CellAmountOfTargetActorsBoundsOccupied,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_CollisionChannel,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_bDrawDebugFromPlayer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AH3DVolume_Statics::NewProp_PlayersDrawDistance,
@@ -725,10 +724,10 @@ AH3DVolume::~AH3DVolume() {}
 struct Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_H3DVolume_h__Script_H3DPathfinding_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AH3DVolume, AH3DVolume::StaticClass, TEXT("AH3DVolume"), &Z_Registration_Info_UClass_AH3DVolume, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AH3DVolume), 2445461907U) },
+		{ Z_Construct_UClass_AH3DVolume, AH3DVolume::StaticClass, TEXT("AH3DVolume"), &Z_Registration_Info_UClass_AH3DVolume, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AH3DVolume), 1760191377U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_H3DVolume_h__Script_H3DPathfinding_222538821(TEXT("/Script/H3DPathfinding"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_H3DVolume_h__Script_H3DPathfinding_874376670(TEXT("/Script/H3DPathfinding"),
 	Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_H3DVolume_h__Script_H3DPathfinding_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Haktan_Desktop_H3DPathfinding_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_H3DVolume_h__Script_H3DPathfinding_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

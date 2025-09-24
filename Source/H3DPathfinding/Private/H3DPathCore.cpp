@@ -16,8 +16,23 @@ AH3DPathCore* AH3DPathCore::Instance = nullptr;
 
 AH3DPathCore* AH3DPathCore::GetInstance(UWorld* World)
 {
+	if (!World)
+		return nullptr;
+	
+	if (!IsValid(Instance) || Instance->GetWorld() != World || Instance->IsPendingKillPending() || Instance->IsActorBeingDestroyed())
+	{
+		if (IsValid(Instance))
+			Instance->Destroy();
+		Instance = nullptr;
+	}
+
 	if (!Instance)
-		Instance = World->SpawnActor<AH3DPathCore>();
+	{
+		FActorSpawnParameters Params;
+		Params.ObjectFlags |= RF_Transient;
+		Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		Instance = World->SpawnActor<AH3DPathCore>(Params);
+	}
 	return Instance;
 }
 
@@ -186,6 +201,40 @@ void AH3DPathCore::FindPath(UWorld* World, AH3DVolume* Volume, APawn* OwnerPawn,
 		GetNeighborNodes(World, *currentGrid, neighborsIDs, *Volume, OwnerPawn, openMap, closedSet, CharacterRadius, CharacterHalfHeight, startGridID, endGridID);
 		NeighborAdjustments(*Volume, neighborsIDs, openMap, closedSet, *currentGrid, End, openQueue);
 	}
+	const int32 extraSteps = (int32)Volume->GetCellSizeMultiplierForAdjustment() + 2;
+	
+	FVector adjustedEnd = End;
+	if (TryRelocateAround(World, Volume, adjustedEnd, extraSteps))
+	{
+		if (IsLocationAvailable(World, Volume, adjustedEnd, OwnerPawn, CharacterRadius, CharacterHalfHeight))
+		{
+			FindPath(World, Volume, OwnerPawn, Result, Start, adjustedEnd, CharacterRadius, CharacterHalfHeight);
+			if (Result.bSuccess) return;
+		}
+	}
+	
+	FVector adjustedStart = Start;
+	if (TryRelocateAround(World, Volume, adjustedStart, extraSteps))
+	{
+		if (IsLocationAvailable(World, Volume, adjustedStart, OwnerPawn, CharacterRadius, CharacterHalfHeight))
+		{
+			FindPath(World, Volume, OwnerPawn, Result, adjustedStart, End, CharacterRadius, CharacterHalfHeight);
+			if (Result.bSuccess) return;
+		}
+	}
+	
+	FVector adjustedStart2 = Start, adjustedEnd2 = End;
+	if (TryRelocateAround(World, Volume, adjustedStart2, extraSteps) &&
+		TryRelocateAround(World, Volume, adjustedEnd2, extraSteps))
+	{
+		if (IsLocationAvailable(World, Volume, adjustedStart2, OwnerPawn, CharacterRadius, CharacterHalfHeight) &&
+			IsLocationAvailable(World, Volume, adjustedEnd2,   OwnerPawn, CharacterRadius, CharacterHalfHeight))
+		{
+			FindPath(World, Volume, OwnerPawn, Result, adjustedStart2, adjustedEnd2, CharacterRadius, CharacterHalfHeight);
+			if (Result.bSuccess) return;
+		}
+	}
+	
 	Result.bSuccess = false;
 	Result.FailureType = EFailureType::PathNotFound;
 }
@@ -309,11 +358,8 @@ bool AH3DPathCore::CheckEndLocationAvailability(UWorld* World, AH3DVolume* Volum
 			if (Volume->GetGridFromID(Volume->GetGridIDFromPosition(checkPosition)) &&
 					Volume->GetGridFromID(Volume->GetGridIDFromPosition(checkPosition))->bIsFree)
 			{
-				if (IsLocationAvailable(World, Volume, checkPosition, OwnerPawn, CharacterRadius, CharacterHalfHeight))
-				{
-					End = checkPosition;
-					return true;	
-				}
+				End = checkPosition;
+				return true;	
 			}
 		}
 	}
@@ -344,11 +390,8 @@ bool AH3DPathCore::CheckStartLocationAvailability(UWorld* World, AH3DVolume* Vol
 			if (Volume->GetGridFromID(Volume->GetGridIDFromPosition(checkPosition)) &&
 					Volume->GetGridFromID(Volume->GetGridIDFromPosition(checkPosition))->bIsFree)
 			{
-				if (IsLocationAvailable(World, Volume, checkPosition, OwnerPawn, CharacterRadius, CharacterHalfHeight))
-				{
-					Start = checkPosition;
-					return true;
-				}
+				Start = checkPosition;
+				return true;
 			}
 		}
 	}
@@ -360,7 +403,7 @@ bool AH3DPathCore::IsLocationAvailable(UWorld* World, const AH3DVolume* Volume, 
 	FCollisionQueryParams queryParams;
 	queryParams.AddIgnoredActor(OwnerPawn);
 	queryParams.bTraceComplex = false;
-	FCollisionShape collisionShape = FCollisionShape::MakeCapsule(CharacterRadius / 1.25, CharacterHalfHeight); //There is a little tolerance to avoid getting stuck on small obstacles
+	FCollisionShape collisionShape = FCollisionShape::MakeCapsule(CharacterRadius / Volume->GetPhysicTestTolerance(), CharacterHalfHeight); //There is a little tolerance to avoid getting stuck on small obstacles
 
 	bool bHit = World->OverlapBlockingTestByChannel(
 		Location,
@@ -378,7 +421,7 @@ bool AH3DPathCore::CanSkip(UWorld* World, const AH3DVolume* Volume, const FVecto
 	FCollisionQueryParams queryParams;
 	queryParams.AddIgnoredActor(OwnerPawn);
 	queryParams.bTraceComplex = false;
-	FCollisionShape collisionShape = FCollisionShape::MakeCapsule(CharacterRadius / 1.25, CharacterHalfHeight); //There is a little tolerance to avoid getting stuck on small obstacles
+	FCollisionShape collisionShape = FCollisionShape::MakeCapsule(CharacterRadius / Volume->GetPhysicTestTolerance(), CharacterHalfHeight); //There is a little tolerance to avoid getting stuck on small obstacles
 	
 	bool bHit = World->SweepSingleByChannel(
 		hitResult,
@@ -390,5 +433,36 @@ bool AH3DPathCore::CanSkip(UWorld* World, const AH3DVolume* Volume, const FVecto
 		queryParams
 	);
 	return !bHit;
+}
+
+bool AH3DPathCore::TryRelocateAround(UWorld* World, AH3DVolume* Volume,
+	FVector& InOutLocation, int32 ExtraSteps)
+{
+	if (!World || !Volume) return false;
+	
+	 TArray dirs = {
+		FVector::ForwardVector, FVector::BackwardVector,
+		FVector::RightVector,   FVector::LeftVector,
+		FVector::UpVector,      FVector::DownVector
+	};
+
+	for (int step = 1; step <= ExtraSteps; ++step)
+	{
+		for (int i = 0; i < 6; ++i)
+		{
+			FVector candidate = InOutLocation + dirs[i] * (Volume->GetGridCellSize() * step);
+			int gridID = Volume->GetGridIDFromPosition(candidate);
+			if (gridID == -1)
+				continue;
+			
+			FPathfindingGrid* grid = Volume->GetGridFromID(gridID);
+			if (!grid || !grid->bIsFree)
+				continue;
+
+			InOutLocation = candidate;
+			return true;
+		}
+	}
+	return false;
 }
 

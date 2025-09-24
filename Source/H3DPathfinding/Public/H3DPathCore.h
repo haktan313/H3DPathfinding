@@ -46,5 +46,6 @@ private:
 	bool IsLocationAvailable(UWorld* World, const AH3DVolume* Volume, const FVector& Location, APawn* OwnerPawn, float CharacterRadius, float CharacterHalfHeight);
 	bool CanSkip(UWorld* World, const AH3DVolume* Volume, const FVector& Start, const FVector& End, APawn* OwnerPawn,
 		float CharacterRadius, float CharacterHalfHeight);
-	
+	bool TryRelocateAround(UWorld* World, AH3DVolume* Volume, FVector& InOutLocation,
+	                       int32 ExtraSteps);
 };

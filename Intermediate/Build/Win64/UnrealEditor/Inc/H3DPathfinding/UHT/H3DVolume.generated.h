@@ -19,7 +19,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 // ********** Begin Class AH3DVolume ***************************************************************
 #define FID_Users_Haktan_Desktop_H3DPathfinding_H3DPathfinding_HostProject_Plugins_H3DPathfinding_Source_H3DPathfinding_Public_H3DVolume_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGenerateGridID); \
-	DECLARE_FUNCTION(execGetCellAmountOfTargetActorsBoundsOccupied); \
+	DECLARE_FUNCTION(execGetPhysicTestTolerance); \
 	DECLARE_FUNCTION(execGetCollisionChannel); \
 	DECLARE_FUNCTION(execGetUpdateGridsRate); \
 	DECLARE_FUNCTION(execGetCellSizeMultiplierForAdjustment); \

@@ -196,7 +196,7 @@ void UH3DMoveToAsyncAction::CheckAvailability()
 				bRepathInProgress = true;
 				FVector velocityDir = Pawn->GetVelocity().GetSafeNormal();
 				Volume->FindPath(this, FName("OnPathFound"), Pawn,
-				                    Pawn->GetActorLocation() + (velocityDir * newPathStartPointPredictionTime * Volume->GetGridCellSize()), TargetLocation, Tolerance);
+				                    Pawn->GetActorLocation() + (velocityDir * NewPathStartPointPredictionTime * Volume->GetGridCellSize()), TargetLocation, Tolerance);
 				
 				timerManager.SetTimer(CooldownForFindNewPathHandleCheckAvailability, FTimerDelegate::CreateWeakLambda(this,[this]
 				{
@@ -206,7 +206,7 @@ void UH3DMoveToAsyncAction::CheckAvailability()
 						if (TargetActor && !WorldContext->GetWorld()->GetTimerManager().IsTimerActive(CheckTargetActorsLocationTimerHandle))
 							WorldContext->GetWorld()->GetTimerManager().SetTimer(CheckTargetActorsLocationTimerHandle, this, &UH3DMoveToAsyncAction::CheckTargetActorsLocation, Volume->GetUpdateGridsRate(), true);
 					}
-				}), newPathStartPointPredictionTime, false);
+				}), NewPathStartPointPredictionTime, false);
 				
 			});
 	});
@@ -220,18 +220,25 @@ void UH3DMoveToAsyncAction::CheckTargetActorsLocation()
 	FVector targetActorBoundsExtent = TargetActor->GetComponentsBoundingBox(true).GetExtent();
 	CellAmountOfTargetActorsBoundOcupied = FMath::Max(FMath::CeilToInt(targetActorBoundsExtent.X * 2 / Volume->GetGridCellSize()),
 		FMath::CeilToInt(targetActorBoundsExtent.Y * 2 / Volume->GetGridCellSize()));
-	float ThresholdDistance = CellAmountOfTargetActorsBoundOcupied * Volume->GetGridCellSize() * Volume->GetCellAmountOfTargetActorsBoundsOccupied();
 	
-	if (FVector::Dist(TargetActor->GetActorLocation(), TargetLocation) > ThresholdDistance)
+	float thresholdDistance = CellAmountOfTargetActorsBoundOcupied * Volume->GetGridCellSize();
+	thresholdDistance += Volume->GetGridCellSize() / 2; //This triggers a repath the moment the target position crosses the exact cell
+	
+	const FVector PredictedTarget = TargetActor->GetActorLocation() + TargetActor->GetVelocity() * NewPathStartPointPredictionTime;
+
+	if (FVector::DistSquared(PredictedTarget, TargetLocation) > FMath::Square(thresholdDistance))
 	{
 		auto& TimerManager = WorldContext->GetWorld()->GetTimerManager();
-		TimerManager.ClearTimer(AvailabilityHandle);
+		
+		//TimerManager.ClearTimer(AvailabilityHandle);
 		TimerManager.ClearTimer(CheckTargetActorsLocationTimerHandle);
 		
 		bRepathInProgress = true;
-		TargetLocation = TargetActor->GetActorLocation();
+		TargetLocation = PredictedTarget;
+
 		FVector velocityDir = Pawn->GetVelocity().GetSafeNormal();
-		Volume->FindPath(this, FName("OnPathFound"), Pawn, Pawn->GetActorLocation() + (velocityDir * newPathStartPointPredictionTime * Volume->GetGridCellSize()), TargetLocation, Tolerance);
+		Volume->FindPath(this, FName("OnPathFound"), Pawn,
+			Pawn->GetActorLocation() + (velocityDir * NewPathStartPointPredictionTime * Volume->GetGridCellSize()), TargetLocation, Tolerance);
 		
 		TimerManager.SetTimer(CooldownForFindNewPathHandleTargetActor, FTimerDelegate::CreateWeakLambda(this, [this]
 		{
@@ -241,6 +248,6 @@ void UH3DMoveToAsyncAction::CheckTargetActorsLocation()
 				if (!WorldContext->GetWorld()->GetTimerManager().IsTimerActive(AvailabilityHandle))
 					WorldContext->GetWorld()->GetTimerManager().SetTimer(AvailabilityHandle, this, &UH3DMoveToAsyncAction::CheckAvailability, Volume->GetUpdateGridsRate(), true);
 			}
-		}), newPathStartPointPredictionTime, false);
+		}), NewPathStartPointPredictionTime, false);
 	}
 }

@@ -16,13 +16,13 @@ class H3DPATHFINDING_API AH3DVolume : public AActor
 
 	UPROPERTY(EditAnywhere, Category="Grid Settings|Volume")
 	float VolumeThickness = 5.f;
+	UPROPERTY(EditAnywhere, Category="Grid Settings|Volume", meta=(UIMin="0"))
+	float PhysicTestsTolerance = 1.25f;
 	
 	UPROPERTY(EditAnywhere, Category="Grid Settings|Cells", meta=(UIMin="40", UIMax="120"))
 	uint8 CellSize = 60;
 	UPROPERTY(EditAnywhere, Category="Grid Settings|Cells", meta=(UIMin="0", UIMax="6"))
 	uint8 CellSizeMultiplierForAdjustment = 2;
-	UPROPERTY(EditAnywhere, Category="Grid Settings|Cells", meta=(UIMin="1", UIMax="256"))
-	uint8 CellAmountOfTargetActorsBoundsOccupied = 1;
 	UPROPERTY(EditAnywhere, Category="Grid Settings|Cells")//Trace channel for creating grids
 	TEnumAsByte<ECollisionChannel> CollisionChannel = ECC_WorldStatic;
 	
@@ -123,9 +123,9 @@ public:
 	
 	UFUNCTION(BlueprintPure, Category = "Pathfinding")
 	FORCEINLINE ECollisionChannel GetCollisionChannel() const { return CollisionChannel; }
-	
+
 	UFUNCTION(BlueprintPure, Category = "Pathfinding")
-	FORCEINLINE uint8 GetCellAmountOfTargetActorsBoundsOccupied() const { return CellAmountOfTargetActorsBoundsOccupied; }
+	FORCEINLINE float GetPhysicTestTolerance() const { return PhysicTestsTolerance; } 
 	
 private:
 	UFUNCTION(BlueprintPure, Category = "Pathfinding")
