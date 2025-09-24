@@ -3,11 +3,11 @@
 UE5 async A* pathfinding on a 3D grid. Handles dynamic obstacles (live occupancy + prediction), start and end relocation, path smoothing, detailed debugging tools, and automatic repathing.
 
 ## ✨ Features
-- **Async A* on a true 3D grid** – Keeps the game thread free while computing paths.
+- **Async A on a true 3D grid** – Keeps the game thread free while computing paths.
 - **Dynamic obstacle handling** – Live occupancy tracking and velocity based prediction with **UHDynamicObject** components.
 - **Start & end relocation** – Automatically adjusts blocked or out of volume points.
 - **Path smoothing** – Optional corner skipping and removes unnecessary nodes for cleaner movement.
-- **Blueprint-friendly** – UH3DMoveToAsyncAction lets you request a path without custom C++ code.
+- **Blueprint friendly** – UH3DMoveToAsyncAction lets you request a path without custom C++ code.
 - **Debug tools** – In editor and in game grid visualization, player/camera draw distance controls.
 - **Destination vector or target actor** – Choose a fixed destination or follow a moving target actor.
 
@@ -31,9 +31,13 @@ UE5 async A* pathfinding on a 3D grid. Handles dynamic obstacles (live occupancy
  **Use the Blueprint node H3DMoveTo** (from UH3DMoveToAsyncAction):
 
 - **World Context:** typically Self.
+  
 - **Pawn:** the actor you want to move.
+  
 - **Volume:** the H3DVolume in the level.
+  
 - **Destination:** a world‐space vector.
+  
 - **Optional:** tolerance, debug line, and update rate.
 
 The node drives the Pawn along the computed path and broadcasts OnSuccess or OnFailed with an EFailureType reason if it cannot find a valid path.
