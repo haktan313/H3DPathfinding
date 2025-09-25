@@ -1,4 +1,4 @@
-# H3DPathAIPro
+# H3DPathfinding
 
 UE5 async A* pathfinding on a 3D grid. Handles dynamic obstacles (live occupancy + prediction), start and end relocation, path smoothing, detailed debugging tools, and automatic repathing.
 
